@@ -1,0 +1,18 @@
+Project2 Preparation OO-analysis design 
+
+Completed by: Songguo Li & Chirag Khurana
+
+         1.The two types of users (driver and rider ) would be considered a generalization of user class,  and the different types of request (CurrentRequest and CompletedRequest).
+
+         2.Location and GoogleMap classes would be an example of aggregation, since even though the GoogleMap gets deleted the Location would still exist. (which may be only coordinates itself) 
+The Rideinfo class may contain the information of location expressed by GoogleMap class, therefore we made GoogleMap an arggregation of Rideinfo as well.
+
+         3.The composition is clearly demonstrated since one class cannot exist by itself without the other.
+
+    
+         4.We have added the association with Driver , GoogleMap, Request classes because they ofter interact with each other.
+
+	
+     However, for this UML class diagram, it is still a skeletal representation that does not have all the well-performed functionalities, we
+
+will come back and modify on the UML along with the project proceeds.
