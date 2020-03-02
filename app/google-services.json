@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "354357146229",
+    "firebase_url": "https://jetcab-50df7.firebaseio.com",
+    "project_id": "jetcab-50df7",
+    "storage_bucket": "jetcab-50df7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354357146229:android:95fb52bb0d329a63cf3e3c",
+        "android_client_info": {
+          "package_name": "com.example.jetcab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354357146229-md0739g3av61cabtgdt94kqg62hb8kjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT5BUbo7HY3ugXvt_BRXBJJDbLwC4DXpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354357146229-md0739g3av61cabtgdt94kqg62hb8kjo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

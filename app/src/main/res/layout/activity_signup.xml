@@ -7,39 +7,67 @@
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="monospace"
-        android:gravity="center"
-        android:text="JetCab"
-        android:textSize="50sp"
-        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/login_email"
+        android:id="@+id/signup_email"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="160dp"
         android:inputType="textEmailAddress"
         android:hint="EMAIL ADDRESS" />
 
     <EditText
-        android:id="@+id/login_password"
+        android:id="@+id/signup_password"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:inputType="textPassword"
         android:hint="PASSWORD"/>
 
-    <Button
-        android:id="@+id/login_button"
+    <EditText
+        android:id="@+id/signup_username"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:text="LOGIN"/>
+        android:inputType="textPersonName"
+        android:hint="USERNAME" />
+
+    <EditText
+        android:id="@+id/signup_phone"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:hint="PHONE NUMBER" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup_roles"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/signup_rider"
+            android:layout_width="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:text="RIDER"/>
+
+        <RadioButton
+            android:id="@+id/signup_driver"
+            android:layout_width="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:text="DRIVER"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="SIGN UP"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,15 +78,15 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:text="NO ACCOUNT?"/>
+            android:text="HAVE AN ACCOUNT?"/>
 
         <TextView
-            android:id="@+id/signup"
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:layout_marginTop="20dp"
-            android:text="SIGN UP HERE"
+            android:text="LOGIN HERE"
             android:textColor="#9acd32"/>
 
     </LinearLayout>
