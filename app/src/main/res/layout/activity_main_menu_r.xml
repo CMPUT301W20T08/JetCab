@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenuR"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Post Requests"
+        android:textStyle="bold"
+        android:background="#f5f5dc"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="My Current Requests"
+        android:textStyle="bold"
+        android:background="#f5f5dc"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/profileR"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="My Profile"
+        android:background="#f5f5dc"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/signout_buttonR"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="150dp"
+        android:text="SIGNOUT" />
+
+</LinearLayout>
