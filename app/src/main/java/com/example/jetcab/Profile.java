@@ -19,6 +19,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+//This is user's profile
 public class Profile extends AppCompatActivity {
 
     TextView name,email,phone;
@@ -34,6 +35,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //set the tile "My Profile"
         this.setTitle("My Profile");
 
         name = findViewById(R.id.username);
@@ -43,6 +45,7 @@ public class Profile extends AppCompatActivity {
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
 
+        //get the user's id and read the user's name, email and phone, and then set texts
         userID = myFirebaseAuth.getCurrentUser().getUid();
         DocumentReference dr = myFF.collection("users").document(userID);
         dr.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -54,10 +57,14 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //create dialog to edit email
         diaE = new AlertDialog.Builder(this).create();
         editE = new EditText(this);
         diaE.setTitle("Edit email address");
         diaE.setView(editE);
+
+        //set positive button "Save"
+        //The user clicks on the "Save" button, update email on the screen and in firebase
         diaE.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -75,6 +82,8 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //set negative button "Cancel"
+        //The user clicks on the "Cancel" button, do nothing
         diaE.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -82,6 +91,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //show the dialog
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,11 +100,14 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
+        //create dialog to edit phone
         diaP = new AlertDialog.Builder(this).create();
         editP = new EditText(this);
         diaP.setTitle("Edit phone number");
         diaP.setView(editP);
+
+        //set positive button "Save"
+        //The user clicks on the "Save" button, update phone on the screen and in firebase
         diaP.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -112,6 +125,9 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
+        //set negative button "Cancel"
+        //The user clicks on the "Cancel" button, do nothing
         diaP.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -119,6 +135,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //show the dialog
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

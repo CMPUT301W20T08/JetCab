@@ -16,7 +16,7 @@
         android:paddingLeft="10dp"
         android:text="USERNAME"
         android:textStyle="bold"
-        android:background="#f5f5dc"
+        android:background="#e8e8e8"
         android:textSize="23sp"/>
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_marginLeft="10dp"
         android:text="CONTENT INFORMATION"
         android:textStyle="bold"
-        android:background="#f5f5dc"
+        android:background="#e8e8e8"
         android:paddingLeft="10dp"
         android:textSize="23sp"/>
 
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="email:"
+            android:text="Email:"
             android:paddingLeft="20dp"
             android:textStyle="bold"
             android:textSize="23sp"/>
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="phone number:"
+            android:text="Phone Number:"
             android:textStyle="bold"
             android:paddingLeft="20dp"
             android:textSize="23sp"/>

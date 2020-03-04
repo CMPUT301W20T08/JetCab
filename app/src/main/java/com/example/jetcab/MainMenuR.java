@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+//This is rider's main menu
 public class MainMenuR extends AppCompatActivity {
 
     Button signoutR;
@@ -19,11 +20,14 @@ public class MainMenuR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_r);
+
+        //set the tile "Rider's Main Menu"
         this.setTitle("Rider's Main Menu");
 
         signoutR = findViewById(R.id.signout_buttonR);
         profileR = findViewById(R.id.profileR);
 
+        //Sign out if the user click on signout button
         signoutR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +36,7 @@ public class MainMenuR extends AppCompatActivity {
             }
         });
 
+        //go to the user's profile if the user clicks on "My Profile"
         profileR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
