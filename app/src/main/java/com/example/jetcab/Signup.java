@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+//This is Sign up activity
 public class Signup extends AppCompatActivity {
 
     public static final String TAG = "TAG";
@@ -46,6 +47,7 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //set the tile "Sign up"
         this.setTitle("Sign up");
 
         myFirebaseAuth = FirebaseAuth.getInstance();
@@ -60,6 +62,7 @@ public class Signup extends AppCompatActivity {
         signupRider=findViewById(R.id.signup_rider);
         signupDriver=findViewById(R.id.signup_driver);
 
+        //if the user clicks on sign up button
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,30 +72,32 @@ public class Signup extends AppCompatActivity {
                 final String name = signupName.getText().toString();
                 final String phone = signupPhone.getText().toString();
 
+                //check whether email is empty or not, set error if it is empty
                 if (emailUp.isEmpty()){
                     signupEmail.setError("Please enter email address");
                     signupEmail.requestFocus();
                 }
+                //check whether password is empty or not, set error if it is empty
                 else if(passwordUp.isEmpty()){
                     signupPassword.setError("Please enter password");
                     signupPassword.requestFocus();
                 }
-                else if(passwordUp.isEmpty()){
-                    signupPassword.setError("Please enter password");
-                    signupPassword.requestFocus();
-                }
+                //check whether email is less than 6 characters or not, set error if it is less than 6 characters
                 else if (passwordUp.length() < 6){
                     signupPassword.setError("Password must be >= 6 characters");
                     signupPassword.requestFocus();
                 }
+                //check whether name is empty or not, set error if it is empty
                 else if(name.isEmpty()){
                     signupName.setError("Please enter username");
                     signupName.requestFocus();
                 }
+                //check whether phone is empty or not, set error if it is empty
                 else if(phone.isEmpty()){
                     signupPhone.setError("Please enter phone number");
                     signupPhone.requestFocus();
                 }
+                //check whether the user choose a role or not
                 else if(selectUp == -1){
                     Toast.makeText(Signup.this,"Please choose a role",Toast.LENGTH_SHORT).show();
                 }
@@ -104,6 +109,7 @@ public class Signup extends AppCompatActivity {
                                 Toast.makeText(Signup.this,"signup unsuccessfully, please try again. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                //check if the username is used
                                 DocumentReference docu = myFF.collection("users_list").document(name);
                                 docu.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
@@ -111,11 +117,13 @@ public class Signup extends AppCompatActivity {
                                         if (task.isSuccessful()) {
 
                                             DocumentSnapshot document = task.getResult();
+                                            // If the username is used, set error
                                             if (document.exists()) {
                                                 Log.d(TAG, "Document exists!");
                                                 signupName.setError("Username is used");
                                                 signupName.requestFocus();
                                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                //delete the user
                                                 user.delete()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
@@ -129,10 +137,14 @@ public class Signup extends AppCompatActivity {
                                                             }
                                                         });
                                             } else {
+                                                //if the username is not created
                                                 Log.d(TAG, "Document does not exist!");
+                                                //get the user's user ID
                                                 userID = myFirebaseAuth.getCurrentUser().getUid();
+                                                //create "users_list" collection which the document is the user's name
                                                 DocumentReference docu = myFF.collection("users_list").document(name);
                                                 Map<String,Object> users = new HashMap<>();
+                                                //add name and role value into the user's field
                                                 users.put("username",name);
                                                 users.put("role","rider");
                                                 docu.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,8 +159,10 @@ public class Signup extends AppCompatActivity {
                                                     }
                                                 });
 
+                                                //create "users" collection which the document is the user's user ID
                                                 DocumentReference dF = myFF.collection("users").document(userID);
                                                 Map<String,Object> u = new HashMap<>();
+                                                //add name, email, phone and role value into the user's field
                                                 u.put("username",name);
                                                 u.put("email",emailUp);
                                                 u.put("phone",phone);
@@ -165,6 +179,9 @@ public class Signup extends AppCompatActivity {
                                                     }
                                                 });
 
+                                                //if the user sign up as a rider
+                                                //create "rider" collection and add the user's name as a value
+                                                //go to MainMenuR activity
                                                 if(signupRider.isChecked()){
                                                     DocumentReference dr = myFF.collection("rider").document(userID);
                                                     Map<String,Object> user = new HashMap<>();
@@ -183,6 +200,9 @@ public class Signup extends AppCompatActivity {
                                                     startActivity(new Intent(Signup.this,MainMenuR.class));
                                                 }
                                                 else{
+                                                    //if the user sign up as a driver
+                                                    //create "driver" collection and add the user's name as a value
+                                                    //go to MainMenuD activity
                                                     DocumentReference dr = myFF.collection("driver").document(userID);
                                                     Map<String,Object> user = new HashMap<>();
                                                     user.put("username",name);
@@ -213,6 +233,7 @@ public class Signup extends AppCompatActivity {
             }
         });
 
+        //if the user clicks on "LOGIN IN HERE" textview, go to Login activity
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
