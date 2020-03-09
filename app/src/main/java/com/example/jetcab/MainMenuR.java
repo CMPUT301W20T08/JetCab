@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainMenuR extends AppCompatActivity {
 
     Button signoutR;
-    TextView profileR;
+    TextView profileR,PostRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainMenuR extends AppCompatActivity {
 
         signoutR = findViewById(R.id.signout_buttonR);
         profileR = findViewById(R.id.profileR);
+        PostRequest=findViewById ( R.id.postrequest );
 
         //Sign out if the user click on signout button
         signoutR.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +44,11 @@ public class MainMenuR extends AppCompatActivity {
                 startActivity(new Intent(MainMenuR.this,Profile.class));
             }
         });
+        PostRequest.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity(new Intent(MainMenuR.this,CurrentRequest.class));
+            }
+        } );
     }
 }
