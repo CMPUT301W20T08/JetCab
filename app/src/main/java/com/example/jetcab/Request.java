@@ -1,5 +1,9 @@
 package com.example.jetcab;
 
+/**
+ * @author chirag
+ */
+
 public class Request implements RequestResponse {
 
     //private RideInfo rideInfo;
@@ -13,7 +17,7 @@ public class Request implements RequestResponse {
     public Request( /*PickUpLocation, DropoffLocation*/)
     {
         ResponseOpenRequest ();
-        // save the request in the firbase along with ride info
+        // save the request in the firbase along with ride info, have to do that part.
 
     }
 
