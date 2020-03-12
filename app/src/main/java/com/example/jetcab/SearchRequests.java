@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SearchRequests extends AppCompatActivity {
-    onCreate
+    //pass
 }
 
 
@@ -25,4 +25,3 @@ public class SearchRequests extends AppCompatActivity {
 //        super.onCreate ( savedInstanceState );
 //        setContentView ( R.layout.activity_driver__search__request );
 //    }
-}

@@ -37,7 +37,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CurrentRequest.this, MainMenuR.class));
+                startActivity(new Intent(CurrentRequest.this, MainMenuR.class)); //todo implement are you sure? box
             }
         });
     }

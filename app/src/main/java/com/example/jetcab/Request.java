@@ -125,7 +125,7 @@ public class Request implements RequestResponse {
         }).addOnFailureListener(new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Request Update Unsuccessfull");
+                Log.d(TAG, "Request Update Unsuccessful");
             }
         });
         ShiftData ( dF,dF1 );
@@ -152,7 +152,7 @@ public class Request implements RequestResponse {
         }).addOnFailureListener(new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Request Update Unsuccessfull");
+                Log.d(TAG, "Request Update Unsuccessful");
             }
         });
 
