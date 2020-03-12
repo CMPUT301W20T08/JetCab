@@ -23,12 +23,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import static com.example.jetcab.Signup.TAG;
 
 
-public class Request implements RequestResponse {
-    private FirebaseAuth myFirebaseAuth;
-    private FirebaseFirestore myFF;
-    private String userID;
-    private String status;
-    private String CurrDateTime;
+public class Request {
+    private static FirebaseAuth myFirebaseAuth;
+    private static FirebaseFirestore myFF;
+    private static String userID;
+    private static String status;
+    private static String CurrDateTime;
 
     /**
      *  create a new Request and will save it in the firebase
@@ -72,7 +72,7 @@ public class Request implements RequestResponse {
     /**
      * Set the status open, will be used to display all open request to the driver
      */
-    @Override
+
     public void ResponseOpenRequest ()
     {
         status="Open";
@@ -81,12 +81,13 @@ public class Request implements RequestResponse {
     /**
      * Set the status  cancelled, if the rider cancelled the ride;
      */
-    @Override
-    public void CancelledRequest () {
+
+    public static void  CancelledRequest (String userID, final DocumentReference dF) {
         status="Cancelled";
         Map<String,Object> update = new HashMap<> ();
         update.put("status",status);
-        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
         final DocumentReference dF1 = myFF.collection("Cancelled Requests").document(userID);
         dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
             @Override
@@ -109,13 +110,14 @@ public class Request implements RequestResponse {
      * Set the status  completed after the rider has reached his destination;
      */
 
-    @Override
-    public void CompletedRequest () {
+
+    public static void CompletedRequest (String userID, final DocumentReference dF) {
 
         status="Completed";
         Map<String,Object> update = new HashMap<> ();
         update.put("status",status);
-        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
         final DocumentReference dF1 = myFF.collection("Completed Requests").document(userID);
         dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
             @Override
@@ -137,13 +139,14 @@ public class Request implements RequestResponse {
      * Set the status Accepted if the driver accepted the riders request;
      */
 
-    @Override
-    public void AcceptedRequest (String DriverID) {
+
+    public static void AcceptedRequest (String DriverID,String userID, final DocumentReference dF) {
         status="Accepted";
         Map<String,Object> update = new HashMap<> ();
         update.put("status",status);
         update.put("Driver User Id",DriverID);
-        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
         dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
             @Override
             public void onSuccess(Void aVoid) {
@@ -155,11 +158,14 @@ public class Request implements RequestResponse {
                 Log.d(TAG, "Request Update Unsuccessful");
             }
         });
+        final DocumentReference dF1 = myFF.collection("Accepted Requests").document(userID);
+        ShiftData ( dF,dF1 );
+
 
 
     }
 
-    public void ShiftData(final DocumentReference dF, final DocumentReference dF1)
+    public static void ShiftData(final DocumentReference dF, final DocumentReference dF1)
     {
         dF.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
             @Override

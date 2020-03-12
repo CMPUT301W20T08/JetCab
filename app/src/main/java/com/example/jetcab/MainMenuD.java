@@ -30,17 +30,10 @@ public class MainMenuD extends AppCompatActivity {
         past_reqs_button = findViewById(R.id.past_reqD);
         profile_button = findViewById(R.id.profileD);
         signoutD = findViewById(R.id.signout_buttonD);
+        profile_button = findViewById(R.id.profileD);
 
-        //View current requests in a list
-        search_req_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, Driver_Search_Request.class));
-            }
-        });
-
-        //view the driver's current request
-        current_reqs_button.setOnClickListener(new View.OnClickListener() {
+        //Sign out if the user click on signout button
+        signoutD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainMenuD.this, CurrentRequest.class));
@@ -62,6 +55,14 @@ public class MainMenuD extends AppCompatActivity {
                 startActivity(new Intent(MainMenuD.this,Profile.class));
             }
         });
+
+        //driver should be able to see all the current requests.
+        search_req_button.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity ( new Intent ( MainMenuD.this,Driver_Search_Request.class ) );
+            }
+        } );
 
         //Sign out if the user click on signout button
         signoutD.setOnClickListener(new View.OnClickListener() {
