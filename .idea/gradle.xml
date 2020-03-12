@@ -3,6 +3,7 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT" />
         </compositeConfiguration>
