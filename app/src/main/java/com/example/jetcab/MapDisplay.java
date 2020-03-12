@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +28,8 @@ import java.util.Locale;
 
 public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-    String start_location;
-    TextView test;
-    Double start_lat, start_lng;
+    String start_location, end_location;
+    EditText test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         MapDisplay.this.setTitle("Map View");
 
         test = findViewById(R.id.test);
+        Intent intent = getIntent();
+        start_location = intent.getStringExtra("START LOCATION");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -50,17 +52,8 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         // Add a marker of start location
-        Intent intent = getIntent();
-        start_location = intent.getStringExtra("START LOCATION");
-
         GeocoderHandler geocoderHandler = new GeocoderHandler();
         getLatLng(start_location, getApplicationContext(), geocoderHandler);
-        //!!!!!get error here, cannot get lat and lng from handler!!!!!
-        if (start_lat == null && start_lng == null) {
-            LatLng from = new LatLng(Double.valueOf(test.getText().toString()),-29.3);
-            mMap.addMarker(new MarkerOptions().position(from).title(start_location));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
-        }
     }
 
     public static void getLatLng(final String location, final Context context, final Handler handler) {
@@ -97,13 +90,20 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
     }
 
     private class GeocoderHandler extends Handler {
-        Double lat, lng;
+        public Double lat, lng;
+
         @Override
         public void handleMessage(Message message) {
             Bundle bundle = message.getData();
             lat = bundle.getDouble("LATITUDE");
             lng = bundle.getDouble("LONGITUDE");
-            test.setText(lat.toString());
+
+            //add start marker
+            if (lat != null && lng != null) {
+                LatLng from = new LatLng(lat, lng);
+                mMap.addMarker(new MarkerOptions().position(from).title("Start Location"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
+            }
         }
     }
 

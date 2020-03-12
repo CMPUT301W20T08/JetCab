@@ -65,7 +65,7 @@ public class PostRequest extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Turn on the Location Permission", Toast.LENGTH_LONG).show();
         }
 
-        //click the map icon to from location on map
+        //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
         textInputLayout_from.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +81,26 @@ public class PostRequest extends AppCompatActivity {
             }
         });
 
+        //click the map icon to specify end location on map
+        textInputLayout_to = findViewById(R.id.to_textField);
+        textInputLayout_to.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText_to.getText() == null) {
+                    Toast.makeText(getApplicationContext(), "Please Enter the End Location", Toast.LENGTH_LONG).show();
+                } else {
+                    end_location = editText_to.getText().toString();
+                    if (isAddressValid(end_location)) {
+                        Intent intent = new Intent(v.getContext(), MapDisplay.class);
+                        intent.putExtra("END LOCATION", end_location);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
         post_button.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +108,6 @@ public class PostRequest extends AppCompatActivity {
             public void onClick(View v) {
                 // check whether the input address is valid
                 if (isAddressValid(editText_from.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "valid Start Location Address", Toast.LENGTH_LONG).show();
                     //...
                     finish();
                 } else {
@@ -133,7 +152,7 @@ public class PostRequest extends AppCompatActivity {
             if (addressList == null && addressList.size() < 1) {
                 return false;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
