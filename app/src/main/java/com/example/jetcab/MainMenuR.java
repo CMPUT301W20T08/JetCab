@@ -29,13 +29,13 @@ public class MainMenuR extends AppCompatActivity {
         current_req = findViewById(R.id.cancel_button);
         past_req = findViewById(R.id.past_req);
 
-        //Post request; riders should be able to post requests
-        PostRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainMenuR.this,CurrentRequest.class));
-            }
-        });
+//         //Post request; riders should be able to post requests
+//         PostRequest.setOnClickListener(new View.OnClickListener() {
+//             @Override
+//             public void onClick(View v) {
+//                 startActivity(new Intent(MainMenuR.this,CurrentRequest.class));
+//             }
+//         });
 
         //Sign out if the user click on signout button
         signoutR.setOnClickListener(new View.OnClickListener() {
@@ -53,5 +53,13 @@ public class MainMenuR extends AppCompatActivity {
                 startActivity(new Intent(MainMenuR.this,Profile.class));
             }
         });
+
+        PostRequest.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                Intent post_request_intent = new Intent(v.getContext(), PostRequest.class);
+                startActivity(post_request_intent);
+            }
+        } );
     }
 }
