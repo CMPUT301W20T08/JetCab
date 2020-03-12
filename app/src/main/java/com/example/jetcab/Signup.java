@@ -146,7 +146,12 @@ public class Signup extends AppCompatActivity {
                                                 Map<String,Object> users = new HashMap<>();
                                                 //add name and role value into the user's field
                                                 users.put("username",name);
-                                                users.put("role","rider");
+                                                if(signupRider.isChecked()){
+                                                    users.put("role","rider");
+                                                }
+                                                else{
+                                                    users.put("role","driver");
+                                                }
                                                 docu.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
@@ -166,7 +171,12 @@ public class Signup extends AppCompatActivity {
                                                 u.put("username",name);
                                                 u.put("email",emailUp);
                                                 u.put("phone",phone);
-                                                u.put("role","rider");
+                                                if(signupRider.isChecked()){
+                                                    u.put("role","rider");
+                                                }
+                                                else{
+                                                    u.put("role","driver");
+                                                }
                                                 dF.set(u).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {

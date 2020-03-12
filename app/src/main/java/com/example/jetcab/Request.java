@@ -31,27 +31,21 @@ public class Request implements RequestResponse {
     @Override
     public void CancelledRequest () {
         status="Cancelled";
-
     }
 
     /**
      * Set the status  completed after the rider has reached his destination;
      */
-
     @Override
     public void CompletedRequest () {
-
         status="Completed";
-
     }
 
     /**
      * Set the status Accepted if the driver accepted the riders request;
      */
-
     @Override
     public void AcceptedRequest () {
         status="Accepted";
-
     }
 }
