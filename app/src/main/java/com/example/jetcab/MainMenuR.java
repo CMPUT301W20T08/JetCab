@@ -44,10 +44,12 @@ public class MainMenuR extends AppCompatActivity {
                 startActivity(new Intent(MainMenuR.this,Profile.class));
             }
         });
+
         PostRequest.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                startActivity(new Intent(MainMenuR.this,CurrentRequest.class));
+                Intent post_request_intent = new Intent(v.getContext(), PostRequest.class);
+                startActivity(post_request_intent);
             }
         } );
     }
