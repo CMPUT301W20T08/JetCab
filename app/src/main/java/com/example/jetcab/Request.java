@@ -1,19 +1,71 @@
 package com.example.jetcab;
 
-public class Request implements RequestResponse {
+import android.util.Log;
+import android.widget.Toast;
 
-    //private RideInfo rideInfo;
+import androidx.annotation.NonNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import static com.example.jetcab.Signup.TAG;
+
+
+public class Request implements RequestResponse {
+    private FirebaseAuth myFirebaseAuth;
+    private FirebaseFirestore myFF;
+    private String userID;
     private String status;
+    private String CurrDateTime;
 
     /**
      *  create a new Request and will save it in the firebase
      *  Initially set the request to Open
      */
 
-    public Request( /*PickUpLocation, DropoffLocation*/)
+    public Request(LatLng pickup, LatLng dropoff, float fare )
     {
         ResponseOpenRequest ();
-        // save the request in the firbase along with ride info
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+        CurrDateTime = simpleDateFormat.format(new Date());
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
+        userID = myFirebaseAuth.getCurrentUser().getUid();
+        String pick= pickup.latitude +","+ pickup.longitude;
+        String drop= dropoff.latitude +","+ dropoff.longitude;
+        DocumentReference dF = myFF.collection("Requests").document(userID);
+        Map<String,Object> request = new HashMap<> ();
+        request.put("Date And Time",CurrDateTime);
+        request.put ( "User ID",userID );
+        request.put("Pickup Coordinates", pick);
+        request.put("DropOff Coordinates", drop);
+        request.put ( "fare",fare );
+        request.put ( "status",status );
+        request.put("Driver User Id","Not Assigned Yet");
+        dF.set(request).addOnSuccessListener(new OnSuccessListener<Void> () {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Request Successfully created");
+            }
+        }).addOnFailureListener(new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Request Unsuccessfull");
+            }
+        });
+
 
     }
 
@@ -21,7 +73,8 @@ public class Request implements RequestResponse {
      * Set the status open, will be used to display all open request to the driver
      */
     @Override
-    public void ResponseOpenRequest () {
+    public void ResponseOpenRequest ()
+    {
         status="Open";
     }
 
@@ -31,6 +84,24 @@ public class Request implements RequestResponse {
     @Override
     public void CancelledRequest () {
         status="Cancelled";
+        Map<String,Object> update = new HashMap<> ();
+        update.put("status",status);
+        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        final DocumentReference dF1 = myFF.collection("Cancelled Requests").document(userID);
+        dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Request Successfully Updated");
+            }
+        }).addOnFailureListener(new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Request Update Unsuccessfull");
+            }
+        });
+
+        ShiftData ( dF,dF1 );
+
 
     }
 
@@ -42,6 +113,23 @@ public class Request implements RequestResponse {
     public void CompletedRequest () {
 
         status="Completed";
+        Map<String,Object> update = new HashMap<> ();
+        update.put("status",status);
+        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        final DocumentReference dF1 = myFF.collection("Completed Requests").document(userID);
+        dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Request Successfully Updated");
+            }
+        }).addOnFailureListener(new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Request Update Unsuccessfull");
+            }
+        });
+        ShiftData ( dF,dF1 );
+
 
     }
 
@@ -50,8 +138,68 @@ public class Request implements RequestResponse {
      */
 
     @Override
-    public void AcceptedRequest () {
+    public void AcceptedRequest (String DriverID) {
         status="Accepted";
+        Map<String,Object> update = new HashMap<> ();
+        update.put("status",status);
+        update.put("Driver User Id",DriverID);
+        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        dF.update ( update ).addOnSuccessListener(new OnSuccessListener<Void> () {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Request Successfully Updated");
+            }
+        }).addOnFailureListener(new OnFailureListener () {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Request Update Unsuccessfull");
+            }
+        });
 
+
+    }
+
+    public void ShiftData(final DocumentReference dF, final DocumentReference dF1)
+    {
+        dF.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        dF1.set(document.getData())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        dF.delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error deleting document", e);
+                                                    }
+                                                });
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                    }
+                                });
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
     }
 }

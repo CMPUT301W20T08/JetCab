@@ -49,5 +49,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         LatLng sydney = new LatLng (21, 151 );
         mMap.addMarker ( new MarkerOptions ( ).position ( sydney ).title ( "Marker in Sydney" ) );
         mMap.moveCamera ( CameraUpdateFactory.newLatLng ( sydney ) );
+
+
     }
 }
