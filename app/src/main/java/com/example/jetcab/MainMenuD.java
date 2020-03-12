@@ -35,8 +35,7 @@ public class MainMenuD extends AppCompatActivity {
         search_req_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(MainMenuD.this, SearchRequests.class));
+                startActivity(new Intent(MainMenuD.this, Driver_Search_Request.class));
             }
         });
 

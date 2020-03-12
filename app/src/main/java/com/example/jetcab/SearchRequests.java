@@ -1,4 +1,28 @@
+//redundant
 package com.example.jetcab;
 
-public class SearchRequests {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+public class SearchRequests extends AppCompatActivity {
+    onCreate
+}
+
+
+//
+//package com.example.jetcab;
+//
+//        import androidx.appcompat.app.AppCompatActivity;
+//
+//        import android.os.Bundle;
+//
+//public class Driver_Search_Request extends AppCompatActivity {
+//
+//    @Override
+//    protected void onCreate ( Bundle savedInstanceState ) {
+//        super.onCreate ( savedInstanceState );
+//        setContentView ( R.layout.activity_driver__search__request );
+//    }
 }
