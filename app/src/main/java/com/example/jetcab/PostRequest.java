@@ -71,28 +71,12 @@ public class PostRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start_location = editText_from.getText().toString();
-                if (isAddressValid(start_location)) {
-                    Intent intent = new Intent(v.getContext(), MapDisplay.class);
-                    intent.putExtra("START LOCATION", start_location);
-                    startActivity(intent);
+                if (start_location.matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please Enter the Start Location", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        //click the map icon to specify end location on map
-        textInputLayout_to = findViewById(R.id.to_textField);
-        textInputLayout_to.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText_to.getText() == null) {
-                    Toast.makeText(getApplicationContext(), "Please Enter the End Location", Toast.LENGTH_LONG).show();
-                } else {
-                    end_location = editText_to.getText().toString();
-                    if (isAddressValid(end_location)) {
+                    if (isAddressValid(start_location)) {
                         Intent intent = new Intent(v.getContext(), MapDisplay.class);
-                        intent.putExtra("END LOCATION", end_location);
+                        intent.putExtra("START LOCATION", start_location);
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
@@ -101,13 +85,35 @@ public class PostRequest extends AppCompatActivity {
             }
         });
 
+        //click the map icon to specify end location on map
+        editText_to = findViewById(R.id.to_editText);
+        textInputLayout_to = findViewById(R.id.to_textField);
+        textInputLayout_to.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                end_location = editText_to.getText().toString();
+                if (end_location.matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please Enter the End Location", Toast.LENGTH_LONG).show();
+                } else {
+                    if (isAddressValid(end_location)) {
+                        Intent intent = new Intent(v.getContext(), MapDisplay.class);
+                        intent.putExtra("END LOCATION", end_location);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid End Location Address", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
         post_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // check whether the input address is valid
-                if (isAddressValid(editText_from.getText().toString())) {
+                if (isAddressValid(editText_from.getText().toString()) && !start_location.matches("") && !end_location.matches("")) {
                     //...
                     finish();
                 } else {
@@ -157,4 +163,5 @@ public class PostRequest extends AppCompatActivity {
         }
         return true;
     }
+
 }

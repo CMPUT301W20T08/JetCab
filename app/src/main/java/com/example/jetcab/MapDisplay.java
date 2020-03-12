@@ -7,39 +7,29 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     String start_location, end_location;
-    EditText test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_display);
         MapDisplay.this.setTitle("Map View");
-
-        test = findViewById(R.id.test);
-        Intent intent = getIntent();
-        start_location = intent.getStringExtra("START LOCATION");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -51,9 +41,15 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker of start location
-        GeocoderHandler geocoderHandler = new GeocoderHandler();
-        getLatLng(start_location, getApplicationContext(), geocoderHandler);
+        // Add a marker to start location
+        Intent intent = getIntent();
+        start_location = intent.getStringExtra("START LOCATION");
+        getLatLng(start_location, getApplicationContext(), new StartGeocoderHandler());
+
+        // Add a marker to to end location
+        Intent intent1 = getIntent();
+        end_location = intent1.getStringExtra("END LOCATION");
+        getLatLng(end_location, getApplicationContext(), new EndGeocoderHandler());
     }
 
     public static void getLatLng(final String location, final Context context, final Handler handler) {
@@ -89,19 +85,41 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         thread.start();
     }
 
-    private class GeocoderHandler extends Handler {
-        public Double lat, lng;
+    private class StartGeocoderHandler extends Handler {
+        public Double start_lat, start_lng;
 
         @Override
         public void handleMessage(Message message) {
             Bundle bundle = message.getData();
-            lat = bundle.getDouble("LATITUDE");
-            lng = bundle.getDouble("LONGITUDE");
+            start_lat = bundle.getDouble("LATITUDE");
+            start_lng = bundle.getDouble("LONGITUDE");
 
             //add start marker
-            if (lat != null && lng != null) {
-                LatLng from = new LatLng(lat, lng);
-                mMap.addMarker(new MarkerOptions().position(from).title("Start Location"));
+            if (start_lat != null && start_lng != null) {
+                LatLng from = new LatLng(start_lat, start_lng);
+                mMap.addMarker(new MarkerOptions().
+                        position(from).title("Start Location")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
+            }
+        }
+    }
+
+    private class EndGeocoderHandler extends Handler {
+        public Double end_lat, end_lng;
+
+        @Override
+        public void handleMessage(Message message) {
+            Bundle bundle = message.getData();
+            end_lat = bundle.getDouble("LATITUDE");
+            end_lng = bundle.getDouble("LONGITUDE");
+
+            //add end marker
+            if (end_lat != null && end_lng != null) {
+                LatLng from = new LatLng(end_lat, end_lng);
+                mMap.addMarker(new MarkerOptions()
+                        .position(from).title("End Location")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
             }
         }
