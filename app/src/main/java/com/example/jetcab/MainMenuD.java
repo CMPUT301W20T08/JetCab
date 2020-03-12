@@ -32,13 +32,6 @@ public class MainMenuD extends AppCompatActivity {
         signoutD = findViewById(R.id.signout_buttonD);
         profile_button = findViewById(R.id.profileD);
 
-        //Sign out if the user click on signout button
-        signoutD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, CurrentRequest.class));
-            }
-        });
 
         //view drivers previously completed trips
         past_reqs_button.setOnClickListener(new View.OnClickListener() {
