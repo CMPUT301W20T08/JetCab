@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainMenuD extends AppCompatActivity {
 
     Button signoutD;
-    TextView profileD;
+    TextView profileD, searchrequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainMenuD extends AppCompatActivity {
 
         signoutD = findViewById(R.id.signout_buttonD);
         profileD = findViewById(R.id.profileD);
+        searchrequests= findViewById ( R.id.Search );
 
         //Sign out if the user click on signout button
         signoutD.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +44,11 @@ public class MainMenuD extends AppCompatActivity {
                 startActivity(new Intent(MainMenuD.this,Profile.class));
             }
         });
+        searchrequests.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity ( new Intent ( MainMenuD.this,Driver_Search_Request.class ) );
+            }
+        } );
     }
 }

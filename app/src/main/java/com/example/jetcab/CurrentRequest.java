@@ -46,9 +46,13 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng (21, 151 );
+        LatLng sydney = new LatLng (53.518882, -113.453807 );
         mMap.addMarker ( new MarkerOptions ( ).position ( sydney ).title ( "Marker in Sydney" ) );
         mMap.moveCamera ( CameraUpdateFactory.newLatLng ( sydney ) );
+        Request c=new Request ( sydney,sydney,300 );
+        Request d=new Request ( sydney,sydney,300 );
+
+
 
 
     }

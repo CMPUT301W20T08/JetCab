@@ -16,7 +16,9 @@
         android:text="Search Requests"
         android:textStyle="bold"
         android:background="#e8e8e8"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:id="@+id/Search"
+        />
 
     <TextView
         android:layout_width="match_parent"
