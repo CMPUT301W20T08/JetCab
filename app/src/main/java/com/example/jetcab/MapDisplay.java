@@ -7,6 +7,8 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,7 @@ import java.util.Locale;
 public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     String start_location, end_location;
+    ImageButton back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,9 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         setContentView(R.layout.map_display);
         MapDisplay.this.setTitle("Map View");
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        back_button = findViewById(R.id.back_image_button);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -41,15 +46,27 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker to start location
-        Intent intent = getIntent();
-        start_location = intent.getStringExtra("START LOCATION");
-        getLatLng(start_location, getApplicationContext(), new StartGeocoderHandler());
+        Intent intent = this.getIntent();
+        if (intent != null) {
+            String type = intent.getStringExtra("TYPE");
 
-        // Add a marker to to end location
-        Intent intent1 = getIntent();
-        end_location = intent1.getStringExtra("END LOCATION");
-        getLatLng(end_location, getApplicationContext(), new EndGeocoderHandler());
+            //add the marker of the start location
+            if (type.equals("from")) {
+                start_location = intent.getStringExtra("START LOCATION");
+                getLatLng(start_location, getApplicationContext(), new StartGeocoderHandler());
+
+            //add the marker of the end location
+            } else if (type.equals("to")) {
+                end_location = intent.getStringExtra("END LOCATION");
+                getLatLng(end_location, getApplicationContext(), new EndGeocoderHandler());
+            }
+        }
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public static void getLatLng(final String location, final Context context, final Handler handler) {
@@ -100,7 +117,8 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
                 mMap.addMarker(new MarkerOptions().
                         position(from).title("Start Location")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
+                //move camera to the marker and zoom in the map
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(from, 15));
             }
         }
     }
@@ -116,11 +134,12 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
 
             //add end marker
             if (end_lat != null && end_lng != null) {
-                LatLng from = new LatLng(end_lat, end_lng);
+                LatLng to = new LatLng(end_lat, end_lng);
                 mMap.addMarker(new MarkerOptions()
-                        .position(from).title("End Location")
+                        .position(to).title("End Location")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(from));
+                //move camera to the marker and zoom in the map
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(to, 15));
             }
         }
     }
