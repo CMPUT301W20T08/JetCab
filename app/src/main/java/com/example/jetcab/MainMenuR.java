@@ -26,7 +26,7 @@ public class MainMenuR extends AppCompatActivity {
         signoutR = findViewById(R.id.signout_buttonR);
         profileR = findViewById(R.id.profileR);
         PostRequest = findViewById(R.id.postrequest);
-        current_req = findViewById(R.id.cancel_button);
+        current_req = findViewById(R.id.current_req);
         past_req = findViewById(R.id.past_req);
 
 //         //Post request; riders should be able to post requests
@@ -61,5 +61,13 @@ public class MainMenuR extends AppCompatActivity {
                 startActivity(post_request_intent);
             }
         } );
+
+        current_req.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity(new Intent(MainMenuR.this, CurrentRequest.class));
+            }
+        } );
+
     }
 }
