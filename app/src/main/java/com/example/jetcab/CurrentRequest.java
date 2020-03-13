@@ -1,6 +1,7 @@
 package com.example.jetcab;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 public class CurrentRequest extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -22,6 +24,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     private Button cancel_button;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_request);
@@ -33,10 +36,16 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         wait = findViewById(R.id.wait);
         status = findViewById(R.id.status_text);
         cancel_button = findViewById(R.id.cancel_button);
+
+        /**
+         * brings up CancelRequestBeforeFragment as a pop up
+         * to confirm if the user wants to cancel or not
+         */
+
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CurrentRequest.this, MainMenuR.class)); //todo implement are you sure? box
+            public void onClick(View view) {
+                new CancelRequestBeforeFragment().show(getSupportFragmentManager(),"Cancel Request Before");
             }
         });
     }
@@ -54,10 +63,12 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
+
         LatLng sydney = new LatLng(53.518882, -113.453807);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         Request c = new Request(sydney, sydney, 300);
         Request d = new Request(sydney, sydney, 300);
+
     }
 }
