@@ -35,7 +35,6 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         MapDisplay.this.setTitle("Map View");
 
         back_button = findViewById(R.id.back_image_button);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -45,7 +44,6 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         Intent intent = this.getIntent();
         if (intent != null) {
             String type = intent.getStringExtra("TYPE");
@@ -55,7 +53,7 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
                 start_location = intent.getStringExtra("START LOCATION");
                 getLatLng(start_location, getApplicationContext(), new StartGeocoderHandler());
 
-            //add the marker of the end location
+                //add the marker of the end location
             } else if (type.equals("to")) {
                 end_location = intent.getStringExtra("END LOCATION");
                 getLatLng(end_location, getApplicationContext(), new EndGeocoderHandler());
@@ -104,7 +102,6 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
 
     private class StartGeocoderHandler extends Handler {
         public Double start_lat, start_lng;
-
         @Override
         public void handleMessage(Message message) {
             Bundle bundle = message.getData();
@@ -125,7 +122,6 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
 
     private class EndGeocoderHandler extends Handler {
         public Double end_lat, end_lng;
-
         @Override
         public void handleMessage(Message message) {
             Bundle bundle = message.getData();
@@ -143,5 +139,4 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
             }
         }
     }
-
 }
