@@ -22,13 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 //This is user's profile
 public class Profile extends AppCompatActivity {
 
-    TextView name,email,phone;
+    TextView name, email, phone, back;
     FirebaseAuth myFirebaseAuth;
     FirebaseFirestore myFF;
     String userID;
-    AlertDialog diaE;
-    AlertDialog diaP;
-    EditText editE,editP;
+    AlertDialog diaE, diaP;
+    EditText editE, editP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +40,7 @@ public class Profile extends AppCompatActivity {
         name = findViewById(R.id.username);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);
+        back = findViewById(R.id.back);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -71,7 +71,7 @@ public class Profile extends AppCompatActivity {
                 email.setText(editE.getText());
                 DocumentReference dr = myFF.collection("users").document(userID);
                 dr.update("email", email.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener< Void >() {
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(Profile.this, "Updated Successfully",
@@ -114,7 +114,7 @@ public class Profile extends AppCompatActivity {
                 phone.setText(editP.getText());
                 DocumentReference dr = myFF.collection("users").document(userID);
                 dr.update("phone", phone.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener< Void >() {
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(Profile.this, "Updated Successfully",
@@ -144,5 +144,12 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //back to previous activity
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

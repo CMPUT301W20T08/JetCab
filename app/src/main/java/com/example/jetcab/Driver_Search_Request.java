@@ -27,12 +27,10 @@ import java.util.ArrayList;
  */
 
 public class Driver_Search_Request extends AppCompatActivity {
-
-
     private ArrayList<String[]> requestdetails;
     private FirebaseAuth myFirebaseAuth;
     private FirebaseFirestore myFF;
-    private String DriverID ;
+    private String DriverID;
     private ArrayAdapter<String[]> openrequestaddaptor;
     private ListView OpenrequestList;
 
@@ -42,22 +40,18 @@ public class Driver_Search_Request extends AppCompatActivity {
      * @param savedInstanceState
      */
     @Override
-    protected void onCreate ( Bundle savedInstanceState ) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_driver__search__request );
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_driver__search__request);
 
-
-
-        OpenrequestList=findViewById ( R.id.openrequest );
-        requestdetails=new ArrayList<> (  );
-        myFirebaseAuth = FirebaseAuth.getInstance ( );
+        OpenrequestList = findViewById(R.id.openrequest);
+        requestdetails = new ArrayList<>();
+        myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
-        DriverID= myFirebaseAuth.getCurrentUser().getUid();
-
-        final CollectionReference collectionReference=myFF.collection ( "Requests" );
+        DriverID = myFirebaseAuth.getCurrentUser().getUid();
 
 
-
+        final CollectionReference collectionReference = myFF.collection("Requests");
         collectionReference.addSnapshotListener ( new EventListener<QuerySnapshot> ( ) {
 
             /**
@@ -95,22 +89,20 @@ public class Driver_Search_Request extends AppCompatActivity {
              * @param position
              * @param id
              */
+=======
+       
+       
             @Override
-            public void onItemClick ( AdapterView<?> parent, View view, int position, long id ) {
-                Intent intent=new Intent ( Driver_Search_Request.this,AcceptRequest.class );
-                intent.putExtra ( "UserId",requestdetails.get ( position )[0] );
-                intent.putExtra (  "DriverID",DriverID);
-                intent.putExtra ( "pickup",requestdetails.get ( position )[1] );
-                intent.putExtra ( "Drop",requestdetails.get ( position )[3] );
-                intent.putExtra ( "fare",requestdetails.get ( position )[2] );
-                startActivity ( intent );
-                finish ();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Driver_Search_Request.this, AcceptRequest.class);
+                intent.putExtra("UserId", requestdetails.get(position)[0]);
+                intent.putExtra("DriverID", DriverID);
+                intent.putExtra("pickup", requestdetails.get(position)[1]);
+                intent.putExtra("Drop", requestdetails.get(position)[3]);
+                intent.putExtra("fare", requestdetails.get(position)[2]);
+                startActivity(intent);
+                finish();
             }
-        } );
-
-
-
-
-
+        });
     }
 }

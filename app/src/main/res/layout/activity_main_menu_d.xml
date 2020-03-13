@@ -7,7 +7,8 @@
     tools:context=".MainMenuD"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/search_req"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
@@ -17,10 +18,10 @@
         android:textStyle="bold"
         android:background="#e8e8e8"
         android:textSize="25sp"
-        android:id="@+id/Search"
         />
 
-    <TextView
+    <Button
+        android:id="@+id/current_reqD"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
@@ -31,7 +32,19 @@
         android:background="#e8e8e8"
         android:textSize="25sp"/>
 
-    <TextView
+    <Button
+        android:id="@+id/past_reqD"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Past Requests"
+        android:background="#e8e8e8"
+        android:textSize="25sp"/>
+
+    <Button
         android:id="@+id/profileD"
         android:layout_width="match_parent"
         android:layout_height="60dp"
