@@ -16,7 +16,6 @@ public class PostRequestActivityTest {
 
     @Rule
     public ActivityTestRule<PostRequest> rule = new ActivityTestRule<>(PostRequest.class);
-
     @Test
     public void checkSwitchActivity() {
         Espresso.onView(ViewMatchers.withId(R.id.from_textField))
