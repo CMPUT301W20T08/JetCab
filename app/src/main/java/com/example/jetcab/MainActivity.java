@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
-                                Toast.makeText(MainActivity.this,"login unsuccessfully, please try again. " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Login Unsuccessful, Please Try Again" + task.getException().getMessage(),Toast.LENGTH_LONG).show();
                             }
                             else {
                                 //call ifexits to check the user's role

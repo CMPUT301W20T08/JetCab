@@ -2,7 +2,10 @@ package com.example.jetcab;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,7 +18,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class CurrentRequest extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private TextView status,cancel,wait;
+    private TextView status, wait;
+    private Button cancel_button;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -26,9 +30,16 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
                 .findFragmentById ( R.id.map );
         mapFragment.getMapAsync ( this );
 
-        wait=findViewById ( R.id.wait);
-        status=findViewById ( R.id.status_text );
-        cancel=findViewById ( R.id.cancel_text );
+        wait = findViewById ( R.id.wait);
+        status = findViewById ( R.id.status_text );
+        cancel_button = findViewById ( R.id.cancel_button );
+
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CurrentRequest.this, MainMenuR.class)); //todo implement are you sure? box
+            }
+        });
     }
 
 
