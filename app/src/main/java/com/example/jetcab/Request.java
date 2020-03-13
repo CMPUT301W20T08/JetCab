@@ -127,7 +127,7 @@ public class Request {
         }).addOnFailureListener(new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Request Update Unsuccessfull");
+                Log.d(TAG, "Request Update Unsuccessful");
             }
         });
         ShiftData ( dF,dF1 );
@@ -155,7 +155,7 @@ public class Request {
         }).addOnFailureListener(new OnFailureListener () {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Request Update Unsuccessfull");
+                Log.d(TAG, "Request Update Unsuccessful");
             }
         });
         final DocumentReference dF1 = myFF.collection("Accepted Requests").document(userID);
