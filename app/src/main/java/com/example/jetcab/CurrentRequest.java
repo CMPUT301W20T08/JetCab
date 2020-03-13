@@ -1,6 +1,7 @@
 package com.example.jetcab;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 public class CurrentRequest extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -23,23 +25,34 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_current_request );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_current_request);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager ( )
-                .findFragmentById ( R.id.map );
-        mapFragment.getMapAsync ( this );
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
-        wait = findViewById ( R.id.wait);
-        status = findViewById ( R.id.status_text );
-        cancel_button = findViewById ( R.id.cancel_button );
+        wait = findViewById(R.id.wait);
+        status = findViewById(R.id.status_text);
+        cancel_button = findViewById(R.id.cancel_button);
 
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CurrentRequest.this, MainMenuR.class)); //todo implement are you sure? box
+            public void onClick(View view) {
+
+                new CancelRequestBeforeFragment().show(getSupportFragmentManager(),"Cancel Request Before");
             }
         });
+
+//        cancel_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(CurrentRequest.this, MainMenuR.class));
+//            }
+//            });
+        /**
+         * Cancel button prompts a window to cancel a request
+         */
     }
 
 
@@ -62,6 +75,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         mMap.moveCamera ( CameraUpdateFactory.newLatLng ( sydney ) );
         Request c=new Request ( sydney,sydney,300 );
         Request d=new Request ( sydney,sydney,300 );
+        Request f=new Request ( sydney,sydney,200 );
 
 
 
