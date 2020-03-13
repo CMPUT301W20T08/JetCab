@@ -42,6 +42,8 @@ public class PostRequest extends AppCompatActivity {
     Button post_button;
     Geocoder geocoder;
     String start_location, end_location;
+    Double start_lat, start_lng, end_lat, end_lng;
+    private static final int LAT_LNG_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -53,7 +55,6 @@ public class PostRequest extends AppCompatActivity {
 
         //get the current location latitude and longitude
         //get the current address
-        editText_from = findViewById(R.id.from_editText);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         geocoder = new Geocoder(this, Locale.getDefault());
         //check whether the location permission is open
@@ -65,8 +66,25 @@ public class PostRequest extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Turn on the Location Permission", Toast.LENGTH_LONG).show();
         }
 
-        //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
+        editText_from = findViewById(R.id.from_editText);
+        /*//after the user stop typing, get the start lat and lng
+        editText_from.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                start_location = editText_from.getText().toString();
+                if (!hasFocus) {
+                    if (!start_location.matches("")) {
+                        Intent intent = new Intent(v.getContext(), GetLatAndLng.class);
+                        intent.putExtra("START LOCATION", start_location);
+                        intent.putExtra("TYPE", "from");
+                        startActivityForResult(intent, LAT_LNG_REQUEST_CODE);
+                    }
+                }
+            }
+        });*/
+
+        //click the map icon to specify start location on map
         textInputLayout_from.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +96,7 @@ public class PostRequest extends AppCompatActivity {
                         Intent intent = new Intent(v.getContext(), MapDisplay.class);
                         intent.putExtra("START LOCATION", start_location);
                         intent.putExtra("TYPE", "from");
+                        //get the lat and lng from MapDisplay.class
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
@@ -86,9 +105,25 @@ public class PostRequest extends AppCompatActivity {
             }
         });
 
-        //click the map icon to specify end location on map
-        editText_to = findViewById(R.id.to_editText);
         textInputLayout_to = findViewById(R.id.to_textField);
+        editText_to = findViewById(R.id.to_editText);
+        /*//after the user stop typing, get the end lat and lng
+        editText_to.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                end_location = editText_to.getText().toString();
+                if (!hasFocus) {
+                    if (!end_location.matches("")) {
+                        Intent intent = new Intent(v.getContext(), GetLatAndLng.class);
+                        intent.putExtra("END LOCATION", end_location);
+                        intent.putExtra("TYPE", "to");
+                        startActivityForResult(intent, LAT_LNG_REQUEST_CODE);
+                    }
+                }
+            }
+        });*/
+
+        //click the map icon to specify end location on map
         textInputLayout_to.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +159,19 @@ public class PostRequest extends AppCompatActivity {
             }
         });
     }
+
+    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LAT_LNG_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                start_lat = data.getDoubleExtra("START LAG", 0.00);
+                start_lng = data.getDoubleExtra("START LAG", 0.00);
+                end_lat = data.getDoubleExtra("END LAG", 0.00);
+                end_lng = data.getDoubleExtra("END LNG", 0.00);
+            }
+        }
+
+    }*/
 
     private void getLastLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -166,4 +214,35 @@ public class PostRequest extends AppCompatActivity {
         return true;
     }
 
+    public Double getLat(String location) {
+        Address address;
+        Double lat = null;
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(location, 5);
+            if (addresses != null && addresses.size() > 0) {
+                address = addresses.get(0);
+                lat = address.getLatitude();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lat;
+    }
+
+    public Double getLng(String location) {
+        Address address;
+        Double lng = null;
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(location, 5);
+            if (addresses != null && addresses.size() > 0) {
+                address = addresses.get(0);
+                lng = address.getLongitude();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lng;
+    }
 }
+
+
