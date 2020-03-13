@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author chirag
+ * This activity show the full details of a request and enables Driver to Accept Request
+ */
 public class AcceptRequest extends AppCompatActivity {
 
     TextView username, email, phone, pickup, dropoff, fare;
@@ -29,6 +34,11 @@ public class AcceptRequest extends AppCompatActivity {
     private FirebaseAuth myFirebaseAuth;
     private FirebaseFirestore myFF;
 
+    /**
+     * Set the layout attributes by retrieving data from firebase
+     * Uses Geocoder to set the pickup and dropoff address.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +58,20 @@ public class AcceptRequest extends AppCompatActivity {
         DocumentReference dF = myFF.collection("users").document(getIntent().getStringExtra("UserId"));
         dF.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                username.setText((String) documentSnapshot.get("username"));
-                email.setText((String) documentSnapshot.get("email"));
-                phone.setText((String) documentSnapshot.get("phone"));
-            }
-        });
+
+            public void onEvent ( @Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e ) {
+                if(e!=null)
+                {
+                    Log.d("","Error:"+e.getMessage());
+                }
+                else{
+                username.setText ((String)documentSnapshot.get ( "username" )  );
+                email.setText ((String)documentSnapshot.get ( "email" )  );
+                phone.setText ((String)documentSnapshot.get ( "phone" )  );
+            }}
+        } );
+           
+
 
         Geocoder geocoder;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -97,6 +115,12 @@ public class AcceptRequest extends AppCompatActivity {
         }
 
         fare.setText(getIntent().getStringExtra("fare"));
+
+
+
+        /**
+         * Accept On ClickListner accepts the request and changes it status in the firebase.
+         */
 
         Accept.setOnClickListener(new View.OnClickListener() {
             @Override
