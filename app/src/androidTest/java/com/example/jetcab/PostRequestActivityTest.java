@@ -20,6 +20,6 @@ public class PostRequestActivityTest {
     @Test
     public void checkSwitchActivity() {
         Espresso.onView(ViewMatchers.withId(R.id.from_textField))
-                .perform()
+                .perform();
     }
 }
