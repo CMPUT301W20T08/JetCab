@@ -2,6 +2,7 @@ package com.example.jetcab;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 
@@ -24,7 +25,12 @@ public class CancelRequestBeforeFragment extends DialogFragment {
         return builder
                 .setTitle("CANCEL THE REQUEST")
                 .setMessage("Are you sure you want to cancel the request?")
-                .setPositiveButton("Yes",null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // finish activity
+                        getActivity().finish();
+                    }
+                })
                 .setNegativeButton("No",null)
                 .create();
 
