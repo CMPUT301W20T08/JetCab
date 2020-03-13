@@ -89,4 +89,15 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="160dp"
+        android:textColor="#9acd32"
+        android:textSize="18dp"
+        android:text="Back"/>
+
 </LinearLayout>

@@ -66,6 +66,7 @@ public class PostRequest extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Turn on the Location Permission", Toast.LENGTH_LONG).show();
         }
 
+        //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
         editText_from = findViewById(R.id.from_editText);
         /*//after the user stop typing, get the start lat and lng
@@ -142,8 +143,6 @@ public class PostRequest extends AppCompatActivity {
                 }
             }
         });
-
-
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
         post_button.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +192,6 @@ public class PostRequest extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     editText_from.setText(address);
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Turn on the Location Permission", Toast.LENGTH_LONG).show();
                 }
@@ -213,7 +211,7 @@ public class PostRequest extends AppCompatActivity {
         }
         return true;
     }
-
+  
     public Double getLat(String location) {
         Address address;
         Double lat = null;

@@ -19,20 +19,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class CustomList extends ArrayAdapter< String[] >  {
+public class CustomList extends ArrayAdapter<String[]> {
 
     //attributes
-    private ArrayList<String []> requestdetails;
+    private ArrayList<String[]> requestdetails;
     private Context context;
 
     //Citation: ListyCity
     //Source: Lab Exercise 2
-
-    public CustomList(Context context, ArrayList<String []> requestdetails)
-    {
-        super(context,0, requestdetails );
-        this.context=context;
-        this.requestdetails=requestdetails;
+    public CustomList(Context context, ArrayList<String[]> requestdetails) {
+        super(context, 0, requestdetails);
+        this.context = context;
+        this.requestdetails = requestdetails;
     }
 
     @NonNull
@@ -41,42 +39,37 @@ public class CustomList extends ArrayAdapter< String[] >  {
         //return super.getView(position, convertView, parent);
         View view;
         view = convertView;
-
-        if (view == null){
-            view= LayoutInflater.from(context).inflate(R.layout.content,parent,false);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.content, parent, false);
         }
 
-        String details [] =requestdetails.get ( position );
+        String details[] = requestdetails.get(position);
         String address;
-        String coordinates []=details[1].split ( "," );
-        TextView pickUpLocation= view.findViewById(R.id.Pickup_location);
-        TextView fare= view.findViewById(R.id.fare_text);
-        TextView requestno=view.findViewById ( R.id.Requestno );
+        String coordinates[] = details[1].split(",");
+        TextView pickUpLocation = view.findViewById(R.id.Pickup_location);
+        TextView fare = view.findViewById(R.id.fare_text);
+        TextView requestno = view.findViewById(R.id.Requestno);
 
-        requestno.setText ( "Request# "+(position+1));
+        requestno.setText("Request# " + (position + 1));
         Geocoder geocoder;
-        geocoder = new Geocoder(view.getContext (), Locale.getDefault());
+        geocoder = new Geocoder(view.getContext(), Locale.getDefault());
 
         List<Address> addresses;
         try {
-            addresses = geocoder.getFromLocation(Double.valueOf ( coordinates[0] ), Double.valueOf  ( coordinates[1] ), 1);
+            addresses = geocoder.getFromLocation(Double.valueOf(coordinates[0]), Double.valueOf(coordinates[1]), 1);
             if (addresses.size() > 0) {
                 address = addresses.get(0).getAddressLine(0);
                 int count = 0;
-                while ( count < addresses.size()) {
-                    address=addresses.get(count).getAddressLine(0);
+                while (count < addresses.size()) {
+                    address = addresses.get(count).getAddressLine(0);
                     count++;
                 }
-            pickUpLocation.setText ("Pickup: "+address);
+                pickUpLocation.setText("Pickup: " + address);
             }
-
         } catch (IOException e) {
-            e.printStackTrace ( );
+            e.printStackTrace();
         }
-        fare.setText ( "Fare: $"+ details[2] );
-
-
+        fare.setText("Fare: $" + details[2]);
         return view;
     }
-
 }
