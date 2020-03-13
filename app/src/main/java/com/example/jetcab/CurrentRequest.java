@@ -39,20 +39,9 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 new CancelRequestBeforeFragment().show(getSupportFragmentManager(),"Cancel Request Before");
             }
         });
-
-//        cancel_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(CurrentRequest.this, MainMenuR.class));
-//            }
-//            });
-        /**
-         * Cancel button prompts a window to cancel a request
-         */
     }
 
 
