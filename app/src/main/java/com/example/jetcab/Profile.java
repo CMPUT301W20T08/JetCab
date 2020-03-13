@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 //This is user's profile
 public class Profile extends AppCompatActivity {
 
-    TextView name,email,phone;
+    TextView name,email,phone,back;
     FirebaseAuth myFirebaseAuth;
     FirebaseFirestore myFF;
     String userID;
@@ -41,6 +41,7 @@ public class Profile extends AppCompatActivity {
         name = findViewById(R.id.username);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);
+        back=findViewById(R.id.back);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -144,5 +145,12 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        //back to previous activity
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

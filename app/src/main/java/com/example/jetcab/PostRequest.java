@@ -77,6 +77,7 @@ public class PostRequest extends AppCompatActivity {
                     if (isAddressValid(start_location)) {
                         Intent intent = new Intent(v.getContext(), MapDisplay.class);
                         intent.putExtra("START LOCATION", start_location);
+                        intent.putExtra("TYPE", "from");
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
@@ -98,6 +99,7 @@ public class PostRequest extends AppCompatActivity {
                     if (isAddressValid(end_location)) {
                         Intent intent = new Intent(v.getContext(), MapDisplay.class);
                         intent.putExtra("END LOCATION", end_location);
+                        intent.putExtra("TYPE", "to");
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid End Location Address", Toast.LENGTH_LONG).show();
