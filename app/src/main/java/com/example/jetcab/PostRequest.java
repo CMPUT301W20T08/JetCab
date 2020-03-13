@@ -150,11 +150,12 @@ public class PostRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // check whether the input address is valid
-                if (isAddressValid(editText_from.getText().toString()) && !start_location.matches("") && !end_location.matches("")) {
+                if (isAddressValid(editText_from.getText().toString()) && !start_location.matches("")
+                        && !end_location.matches("") && isAddressValid(editText_to.getText().toString())) {
                     //...
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Invalid Locations Address", Toast.LENGTH_LONG).show();
                 }
             }
         });
