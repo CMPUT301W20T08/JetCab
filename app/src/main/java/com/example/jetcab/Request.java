@@ -22,6 +22,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.example.jetcab.Signup.TAG;
 
+/**
+ * @author chirag
+ * Creates a new request.
+ * enable Accepting, Cancelling and completeing Request.
+ */
 
 public class Request {
     private static FirebaseAuth myFirebaseAuth;
@@ -33,6 +38,9 @@ public class Request {
     /**
      *  create a new Request and will save it in the firebase
      *  Initially set the request to Open
+     * @param pickup
+     * @param dropoff
+     * @param fare
      */
 
     public Request(LatLng pickup, LatLng dropoff, float fare )
@@ -79,7 +87,9 @@ public class Request {
     }
 
     /**
-     * Set the status  cancelled, if the rider cancelled the ride;
+     * Set the status  cancelled, if the rider cancelled the ride and updates the firebase
+     * @param dF
+     * @param userID
      */
 
     public static void  CancelledRequest (String userID, final DocumentReference dF) {
@@ -107,7 +117,9 @@ public class Request {
     }
 
     /**
-     * Set the status  completed after the rider has reached his destination;
+     * Set the status  completed after the rider has reached his destination and updates the firebase
+     * @param dF
+     * @param userID
      */
 
 
@@ -136,7 +148,10 @@ public class Request {
     }
 
     /**
-     * Set the status Accepted if the driver accepted the riders request;
+     * Set the status Accepted if the driver accepted the riders request
+     * @param userID
+     * @param DriverID
+     * @param dF
      */
 
 
@@ -165,6 +180,11 @@ public class Request {
 
     }
 
+    /**
+     * This method shifts a document from one collection path to other, making it easy to use for future driver and riders functionalities
+     * @param dF
+     * @param dF1
+     */
     public static void ShiftData(final DocumentReference dF, final DocumentReference dF1)
     {
         dF.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {

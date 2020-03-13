@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+/**
+ * This Activity let the driver serach for Open request posted by the riders
+ * @author chirag
+ */
+
 public class Driver_Search_Request extends AppCompatActivity {
 
 
@@ -30,6 +36,11 @@ public class Driver_Search_Request extends AppCompatActivity {
     private ArrayAdapter<String[]> openrequestaddaptor;
     private ListView OpenrequestList;
 
+    /**
+     * Get all the layout attributes.
+     * Fill the layout by retrieving data from firebase using colllection reference
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
@@ -48,8 +59,19 @@ public class Driver_Search_Request extends AppCompatActivity {
 
 
         collectionReference.addSnapshotListener ( new EventListener<QuerySnapshot> ( ) {
+
+            /**
+             * Add data to the ArrayList
+             * Set the arrayadaptor
+             * @param queryDocumentSnapshots
+             * @param e
+             */
             @Override
             public void onEvent ( @Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e ) {
+                if (e!=null){
+                    Log.d("","Error:"+e.getMessage());
+                }
+                else {
                 for(QueryDocumentSnapshot doc: queryDocumentSnapshots)
                 {
                     String UserId=(String)doc.getData ().get("User ID");
@@ -61,10 +83,18 @@ public class Driver_Search_Request extends AppCompatActivity {
                 }
                 openrequestaddaptor=new CustomList (Driver_Search_Request.this,requestdetails );
                 OpenrequestList.setAdapter ( openrequestaddaptor );
-            }
+            }}
         } );
 
         OpenrequestList.setOnItemClickListener ( new AdapterView.OnItemClickListener ( ) {
+
+            /**
+             * Starts AcceptRequest Activity whenever a ListItem(request) is clicked
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemClick ( AdapterView<?> parent, View view, int position, long id ) {
                 Intent intent=new Intent ( Driver_Search_Request.this,AcceptRequest.class );
