@@ -1,9 +1,7 @@
 package com.example.jetcab;
 
 import android.app.Activity;
-
 import com.robotium.solo.Solo;
-
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
@@ -13,7 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Test class for PostActivity. All the UI tests are written here. Robotium test framework is used
+ * Test class for MainMenR. All the UI tests are written here. Robotium test framework is used
  */
 public class RiderMenuIntentPostRequest {
     private Solo solo;

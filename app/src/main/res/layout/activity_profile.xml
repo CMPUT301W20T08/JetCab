@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
-        android:text="CONTENT INFORMATION"
+        android:text="CONTACT INFORMATION"
         android:textStyle="bold"
         android:background="#e8e8e8"
         android:paddingLeft="10dp"

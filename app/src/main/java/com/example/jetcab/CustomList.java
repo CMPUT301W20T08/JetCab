@@ -19,20 +19,41 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class CustomList extends ArrayAdapter<String[]> {
 
-    //attributes
+/**
+ * @author chirag
+ * This class helps to create a custom array adaptor
+ */
+public class CustomList extends ArrayAdapter< String[] >  {
+//attributes
     private ArrayList<String[]> requestdetails;
     private Context context;
 
-    //Citation: ListyCity
-    //Source: Lab Exercise 2
-    public CustomList(Context context, ArrayList<String[]> requestdetails) {
-        super(context, 0, requestdetails);
-        this.context = context;
-        this.requestdetails = requestdetails;
+
+    /**
+     * Initalizes class varibles
+     * @param context
+     * @param requestdetails
+     */
+
+    public CustomList(Context context, ArrayList<String []> requestdetails)
+    {
+        super(context,0, requestdetails );
+        this.context=context;
+        this.requestdetails=requestdetails;
+
     }
 
+    /**
+     * Inflate the view to content.xml
+     * Fills the layout attributes with data
+     *
+     * geocoder helps to get the address from Latitude and Longitude
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return view
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
