@@ -194,6 +194,13 @@ public class PostRequest extends AppCompatActivity {
 
     }*/
 
+    /**
+     * Returns the amount of the fare based on a fair calculation.
+     * Fares calculated by base amount + price per KM.
+     * @param start string address of starting/pickup location
+     * @param end string address of end/dropoff location
+     * @return a string containing the fare amount
+     */
     @SuppressLint("DefaultLocale")
     private String getFare(String start, String end) {
         float[] distance = new float[1];
@@ -252,6 +259,7 @@ public class PostRequest extends AppCompatActivity {
         }
         return true;
     }
+
 
     public Double getLat(String location) {
         Address address;
