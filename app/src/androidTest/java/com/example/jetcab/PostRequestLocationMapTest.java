@@ -141,6 +141,35 @@ public class PostRequestLocationMapTest {
     }
 
     /**
+     * Checks if the fair fare is correct
+     */
+    @Test
+    public void checkFairFare() {
+        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+        solo.clearEditText((EditText) solo.getView(R.id.to_editText)); //Clear the EditText
+        solo.clearEditText((EditText) solo.getView(R.id.from_editText)); //Clear the EditText
+
+        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+        solo.enterText((EditText) solo.getView(R.id.from_editText), "West Edmonton Mall");
+        solo.clickOnScreen(1342,713); //coordinate of map icon
+        solo.waitForActivity("MapDisplay");
+        solo.assertCurrentActivity("Wrong Activity", MapDisplay.class);
+        solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
+        solo.waitForActivity("PostRequest");
+        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+
+        solo.enterText((EditText) solo.getView(R.id.to_editText), "University of Alberta");
+        solo.clickOnScreen(1342,713); //coordinate of map icon
+        solo.waitForActivity("MapDisplay");
+        solo.assertCurrentActivity("Wrong Activity", MapDisplay.class);
+        solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
+        solo.waitForActivity("PostRequest");
+        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+
+        assertTrue(solo.waitForText("10.19", 1, 2000));
+    }
+
+    /**
      * Closes the activity after each test
      * @throws Exception
      */
