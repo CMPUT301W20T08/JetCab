@@ -155,14 +155,14 @@ public class PostRequest extends AppCompatActivity {
             }
         });
 
-        //pressing the fare textview updates fare
-        final TextView fare = findViewById(R.id.fair_fare_text);
-        fare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fare.setText((getFare(start_location, end_location));
-            }
-        });
+//        //pressing the fare textview updates fare
+//        final TextView fare = findViewById(R.id.fair_fare_text);
+//        fare.setOnClickListener(new View.OnClickListener()) {
+//            @Override
+//            public void onClick(View v) {
+//                fare.setText(getFare(start_location, end_location));
+//            }
+//        });
 
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
