@@ -69,5 +69,6 @@ public class MainMenuR extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainMenuR.this, MainActivity.class));
             }
+        });
     }
 }
