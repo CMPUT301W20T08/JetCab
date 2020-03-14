@@ -210,7 +210,7 @@ public class PostRequest extends AppCompatActivity {
             Log.d("distance", "Distance: " + (distance[0]));
             amount = (base + perKM*distance[0]/1000);
         }
-        return String.format("%.2f", amount); //convert to float, divide by 1000 to get km
+        return String.format("$%.2f", amount); //convert to float, divide by 1000 to get km
     }
 
     private void getLastLocation() {
