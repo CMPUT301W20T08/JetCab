@@ -1,5 +1,6 @@
 package com.example.jetcab;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,6 +16,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 
 public class CurrentRequest extends FragmentActivity implements OnMapReadyCallback {
@@ -22,6 +29,9 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     private TextView status, wait;
     private Button cancel_button;
+    private static FirebaseAuth myFirebaseAuth;
+    private static FirebaseFirestore myFF;
+    private static String userID;
 
     @Override
 
@@ -37,11 +47,21 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         status = findViewById(R.id.status_text);
         cancel_button = findViewById(R.id.cancel_button);
 
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
+        userID = myFirebaseAuth.getCurrentUser().getUid();
+        DocumentReference dF = myFF.collection("Requests").document(userID);
+        dF.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                status.setText(documentSnapshot.getString("status"));
+            }
+        });
+
         /**
          * brings up CancelRequestBeforeFragment as a pop up
          * to confirm if the user wants to cancel or not
          */
-
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
