@@ -35,7 +35,7 @@ public class DriverCurrentRequest extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    setContentView(R.layout.driver_current_request_none);
+                    setContentView(R.layout.driver_current_request_waiting);
                     
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " -> " + document.getData());
