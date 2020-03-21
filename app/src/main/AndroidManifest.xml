@@ -61,6 +61,7 @@
 
         </activity>
         <activity android:name=".MapDisplay"></activity>
+        <activity android:name=".DriverCurrentRequest"></activity>
     </application>
 
 </manifest>
