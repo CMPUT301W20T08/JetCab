@@ -85,7 +85,7 @@ public class PostRequestLocationMapTest {
         solo.clickOnScreen(1342,459); //coordinate of map icon
 
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
     }
 
     /**
@@ -99,7 +99,7 @@ public class PostRequestLocationMapTest {
 
         solo.clickOnScreen(1317,713); //coordinate of map icon
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
     }
 
     /**
@@ -112,7 +112,7 @@ public class PostRequestLocationMapTest {
         solo.clickOnScreen(1342,459); //coordinate of map icon
 
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
         solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
                                              //unable to use clickOnImageButton here, also, cannot get the
                                              //coordinates of the ImageButton, so this also may not work
@@ -133,7 +133,7 @@ public class PostRequestLocationMapTest {
         solo.clickOnScreen(1342,713); //coordinate of map icon
 
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
         solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
 
         solo.waitForActivity("PostRequest");
@@ -153,7 +153,7 @@ public class PostRequestLocationMapTest {
         solo.enterText((EditText) solo.getView(R.id.from_editText), "West Edmonton Mall");
         solo.clickOnScreen(1342,713); //coordinate of map icon
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
         solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
         solo.waitForActivity("PostRequest");
         solo.assertCurrentActivity("Wrong Activity", Activity_PostRequest.class);
@@ -161,7 +161,7 @@ public class PostRequestLocationMapTest {
         solo.enterText((EditText) solo.getView(R.id.to_editText), "University of Alberta");
         solo.clickOnScreen(1342,713); //coordinate of map icon
         solo.waitForActivity("MapDisplay");
-        solo.assertCurrentActivity("Wrong Activity", Activity_MapDisplay.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_RiderMapDisplay.class);
         solo.clickOnScreen(1407,324); //coordinate of image button (R.id.back_image_button)
         solo.waitForActivity("PostRequest");
         solo.assertCurrentActivity("Wrong Activity", Activity_PostRequest.class);

@@ -27,7 +27,7 @@ import java.util.Locale;
  * @author Joyce
  * specify the start and end location on map
  */
-public class Activity_MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
+public class Activity_RiderMapDisplay extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     String start_location, end_location;
     ImageButton back_button;
@@ -35,8 +35,8 @@ public class Activity_MapDisplay extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_display);
-        Activity_MapDisplay.this.setTitle("Map View");
+        setContentView(R.layout.post_request_map_display);
+        Activity_RiderMapDisplay.this.setTitle("Map View");
 
         back_button = findViewById(R.id.back_image_button);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
