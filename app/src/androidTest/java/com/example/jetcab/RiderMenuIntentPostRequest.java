@@ -47,7 +47,7 @@ public class RiderMenuIntentPostRequest {
         solo.clickOnText("Post Requests");
 
         solo.waitForActivity("PostRequest");
-        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_PostRequest.class);
     }
 
     /**

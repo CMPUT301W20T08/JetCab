@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PostRequest"
+            android:name=".Activity_PostRequest"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -60,8 +60,8 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".MapDisplay"></activity>
-        <activity android:name=".DriverCurrentRequest"></activity>
+        <activity android:name=".Activity_MapDisplay"></activity>
+        <activity android:name=".Activity_DriverCurrentRequest"></activity>
     </application>
 
 </manifest>
