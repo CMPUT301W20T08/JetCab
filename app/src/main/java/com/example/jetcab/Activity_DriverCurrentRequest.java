@@ -110,8 +110,10 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
 
         //move the camera to fit all the markers
         LatLngBounds bounds = builder.build();
-        int padding = 0;
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
         googleMap.moveCamera(cameraUpdate);
     }
 

@@ -84,7 +84,7 @@ public class Activity_PostRequest extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Enter the Start Location", Toast.LENGTH_LONG).show();
                 } else {
                     if (isAddressValid(start_location)) {
-                        Intent intent = new Intent(v.getContext(), Activity_MapDisplay.class);
+                        Intent intent = new Intent(v.getContext(), Activity_RiderMapDisplay.class);
                         intent.putExtra("START LOCATION", start_location);
                         intent.putExtra("TYPE", "from");
                         //get the lat and lng from MapDisplay.class
@@ -111,7 +111,7 @@ public class Activity_PostRequest extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Enter the End Location", Toast.LENGTH_LONG).show();
                 } else {
                     if (isAddressValid(end_location)) {
-                        Intent intent = new Intent(v.getContext(), Activity_MapDisplay.class);
+                        Intent intent = new Intent(v.getContext(), Activity_RiderMapDisplay.class);
                         intent.putExtra("END LOCATION", end_location);
                         intent.putExtra("TYPE", "to");
                         startActivity(intent);

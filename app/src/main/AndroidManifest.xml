@@ -60,8 +60,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".Activity_MapDisplay"></activity>
+        <activity android:name=".Activity_RiderMapDisplay"></activity>
         <activity android:name=".Activity_DriverCurrentRequest"></activity>
+        <activity android:name=".Activity_DriverMapDisplay"></activity>
     </application>
 
 </manifest>
