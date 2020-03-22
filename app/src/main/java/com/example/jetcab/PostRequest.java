@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.local.LocalViewChanges;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,6 +46,7 @@ public class PostRequest extends AppCompatActivity {
     Button post_button;
     Geocoder geocoder;
     String start_location, end_location;
+    TextView fare;
     Double start_lat, start_lng, end_lat, end_lng;
     private static final int LAT_LNG_REQUEST_CODE = 0;
 
@@ -99,6 +104,9 @@ public class PostRequest extends AppCompatActivity {
                         intent.putExtra("TYPE", "from");
                         //get the lat and lng from MapDisplay.class
                         startActivity(intent);
+                        //update fare fair
+                        final TextView fare = findViewById(R.id.fair_fare_text);
+                        fare.setText(getFare(start_location, end_location));
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
                     }
@@ -137,12 +145,25 @@ public class PostRequest extends AppCompatActivity {
                         intent.putExtra("END LOCATION", end_location);
                         intent.putExtra("TYPE", "to");
                         startActivity(intent);
+                        //update fair fare
+                        final TextView fare = findViewById(R.id.fair_fare_text);
+                        fare.setText(getFare(start_location, end_location));
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid End Location Address", Toast.LENGTH_LONG).show();
                     }
                 }
             }
         });
+
+//        //pressing the fare textview updates fare
+//        final TextView fare = findViewById(R.id.fair_fare_text);
+//        fare.setOnClickListener(new View.OnClickListener()) {
+//            @Override
+//            public void onClick(View v) {
+//                fare.setText(getFare(start_location, end_location));
+//            }
+//        });
+
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
         post_button.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +193,32 @@ public class PostRequest extends AppCompatActivity {
         }
 
     }*/
+
+    /**
+     * Returns the amount of the fare based on a fair calculation.
+     * Fares calculated by base amount + price per KM.
+     * @param start string address of starting/pickup location
+     * @param end string address of end/dropoff location
+     * @return a string containing the fare amount
+     */
+    @SuppressLint("DefaultLocale")
+    private String getFare(String start, String end) {
+        float[] distance = new float[1];
+        Double startLat = getLat(start);
+        Double startLng = getLng(start);
+        Double endLat = getLat(end);
+        Double endLng = getLng(end);
+        double perKM = 0.80;
+        double base = 5.0;
+        double amount = 0;
+
+        if (!(startLat == null) & !(startLng == null) & !(endLat == null) & !(endLng == null)) {
+            Location.distanceBetween(startLat, startLng, endLat, endLng, distance);
+            Log.d("distance", "Distance: " + (distance[0]));
+            amount = (base + perKM*distance[0]/1000);
+        }
+        return String.format("$%.2f", amount); //convert to float, divide by 1000 to get km
+    }
 
     private void getLastLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -212,7 +259,8 @@ public class PostRequest extends AppCompatActivity {
         }
         return true;
     }
-  
+
+
     public Double getLat(String location) {
         Address address;
         Double lat = null;

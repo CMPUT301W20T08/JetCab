@@ -43,6 +43,7 @@ public class DriverCurrentRequest extends AppCompatActivity {
 
                 if (!queryDocumentSnapshots.isEmpty()) {
                     setContentView(R.layout.driver_current_request_waiting);
+                  
                 } else {
                     setContentView(R.layout.driver_current_request_none);
                 }
