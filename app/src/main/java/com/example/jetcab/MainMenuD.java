@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -41,7 +40,7 @@ public class MainMenuD extends AppCompatActivity {
         current_reqs_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, DriverCurrentRequest.class));
+                startActivity(new Intent(MainMenuD.this, Activity_DriverCurrentRequest.class));
             }
         });
         //view drivers previously completed trips

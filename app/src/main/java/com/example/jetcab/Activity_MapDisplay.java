@@ -23,7 +23,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
-public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
+/**
+ * @author Joyce
+ * specify the start and end location on map
+ */
+public class Activity_MapDisplay extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     String start_location, end_location;
     ImageButton back_button;
@@ -32,7 +36,7 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_display);
-        MapDisplay.this.setTitle("Map View");
+        Activity_MapDisplay.this.setTitle("Map View");
 
         back_button = findViewById(R.id.back_image_button);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
@@ -41,6 +45,10 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
     }
 
+    /**
+     * connect to the map, check the marker type (from/to), and add marker
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -67,6 +75,13 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         });
     }
 
+    /**
+     * bundle the latitude and longitude from location
+     * start a new thread
+     * @param location
+     * @param context
+     * @param handler
+     */
     public static void getLatLng(final String location, final Context context, final Handler handler) {
         Thread thread = new Thread() {
             @Override
@@ -100,6 +115,9 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         thread.start();
     }
 
+    /**
+     * get the latitude and longitude of start location, and add marker
+     */
     private class StartGeocoderHandler extends Handler {
         public Double start_lat, start_lng;
         @Override
@@ -120,6 +138,9 @@ public class MapDisplay extends AppCompatActivity implements OnMapReadyCallback 
         }
     }
 
+    /**
+     * get the latitude and longitude of end location, and add marker
+     */
     private class EndGeocoderHandler extends Handler {
         public Double end_lat, end_lng;
         @Override
