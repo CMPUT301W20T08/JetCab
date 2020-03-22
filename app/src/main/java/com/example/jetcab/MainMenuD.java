@@ -38,10 +38,10 @@ public class MainMenuD extends AppCompatActivity {
             }
         });
         //driver should be able to see their current request.
-        search_req_button.setOnClickListener(new View.OnClickListener() {
+        current_reqs_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, CurrentRequest.class));
+                startActivity(new Intent(MainMenuD.this, DriverCurrentRequest.class));
             }
         });
         //view drivers previously completed trips
