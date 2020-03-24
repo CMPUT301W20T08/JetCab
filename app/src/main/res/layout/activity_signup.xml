@@ -6,39 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
+    android:background="@drawable/b2"
+    android:alpha="0.85"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/signup_email"
         android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="150dp"
         android:inputType="textEmailAddress"
-        android:hint="EMAIL ADDRESS" />
+        android:alpha="0.7"
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  EMAIL ADDRESS" />
 
     <EditText
         android:id="@+id/signup_password"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:inputType="textPassword"
-        android:hint="PASSWORD"/>
+        android:alpha="0.7"
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  PASSWORD"/>
 
     <EditText
         android:id="@+id/signup_username"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:inputType="textPersonName"
-        android:hint="USERNAME" />
+        android:alpha="0.7"
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  USERNAME" />
 
     <EditText
         android:id="@+id/signup_phone"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:inputType="phone"
-        android:hint="PHONE NUMBER" />
+        android:alpha="0.7"
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  PHONE NUMBER" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -51,6 +69,8 @@
             android:layout_width="150dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/quantum_white_100"
+            android:textColor="@color/quantum_white_100"
             android:text="RIDER"/>
 
         <RadioButton
@@ -58,6 +78,8 @@
             android:layout_width="150dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/quantum_white_100"
+            android:textColor="@color/quantum_white_100"
             android:text="DRIVER"/>
 
     </RadioGroup>
@@ -67,6 +89,9 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/bg"
+        android:textSize="15sp"
+        android:alpha="0.9"
         android:text="SIGN UP"/>
 
     <LinearLayout
@@ -78,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/quantum_white_100"
             android:text="HAVE AN ACCOUNT?"/>
 
         <TextView

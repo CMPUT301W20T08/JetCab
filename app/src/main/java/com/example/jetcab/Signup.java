@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +62,7 @@ public class Signup extends AppCompatActivity {
         signupGroup = findViewById(R.id.signup_roles);
         signupRider = findViewById(R.id.signup_rider);
         signupDriver = findViewById(R.id.signup_driver);
+        login.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         //if the user clicks on sign up button
         signupButton.setOnClickListener(new View.OnClickListener() {

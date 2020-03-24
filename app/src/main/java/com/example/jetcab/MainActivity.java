@@ -3,7 +3,9 @@ package com.example.jetcab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.List;
 
 
 //This is login activity
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.setTitle("Login");  //set the tile "Login"
 
+        checkPermission();
+
         //need FirebaseAuth and FirebaseFirestore to login, and check collections and documents
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -45,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup);
+        signup.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         //check if a user has already logged
         //if there is no current user then call ifexits
@@ -93,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void ifexits() {
+    public void ifexits() {
         //get the current user's user ID
         userID = myFirebaseAuth.getCurrentUser().getUid();
         //check if the user is in "rider" collection
@@ -121,5 +130,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //asks for permissions
+    public void checkPermission() {
+        PermissionListener pl = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+            }
+        };
+
+        TedPermission.with(MainActivity.this)
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET)
+                .check();
     }
 }
