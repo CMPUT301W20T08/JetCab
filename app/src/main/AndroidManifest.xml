@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PostRequest"
+            android:name=".Activity_PostRequest"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -61,7 +61,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapDisplay" />
+        <activity android:name=".Activity_RiderMapDisplay"></activity>
+        <activity android:name=".Activity_DriverCurrentRequest"></activity>
+        <activity android:name=".Activity_DriverMapDisplay"></activity>
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
