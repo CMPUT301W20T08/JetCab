@@ -153,6 +153,7 @@ public class Activity_Signup extends AppCompatActivity {
                                                 Map<String, Object> users = new HashMap<>();
                                                 //add name and role value into the user's field
                                                 users.put("username", name);
+                                                users.put("uid",userID);
                                                 if (signupRider.isChecked()) {
                                                     users.put("role", "rider");
                                                 } else {
@@ -177,6 +178,8 @@ public class Activity_Signup extends AppCompatActivity {
                                                 u.put("username", name);
                                                 u.put("email", emailUp);
                                                 u.put("phone", phone);
+                                                u.put("thumbup",0);
+                                                u.put("thumbdown",0);
                                                 if (signupRider.isChecked()) {
                                                     u.put("role", "rider");
                                                 } else {

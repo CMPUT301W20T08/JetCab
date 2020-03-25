@@ -22,6 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity_scanCode"></activity>
+        <activity android:name=".Activity_Scanner" />
         <activity android:name=".AcceptRequest" />
         <activity android:name=".Driver_Search_Request" />
         <!--
@@ -42,12 +44,15 @@
         <activity android:name=".Activity_Profile" />
         <activity android:name=".Activity_MainMenuD" />
         <activity android:name=".Activity_MainMenuR" />
-        <activity android:name=".Activity_Signup"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Activity_SplashScreen"
+        <activity
+            android:name=".Activity_Signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity_SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -61,12 +66,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_RiderMapDisplay"></activity>
-        <activity android:name=".Activity_DriverCurrentRequest"></activity>
-        <activity android:name=".Activity_DriverMapDisplay"></activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activity_RiderMapDisplay" />
+        <activity android:name=".Activity_DriverCurrentRequest" />
+        <activity android:name=".Activity_DriverMapDisplay" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
-
