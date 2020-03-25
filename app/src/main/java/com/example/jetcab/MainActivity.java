@@ -27,7 +27,10 @@ import com.gun0912.tedpermission.TedPermission;
 import java.util.List;
 
 
-//This is login activity
+/**
+ * @author Yingxin
+ * this is login activity
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
@@ -38,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore myFF;
     String userID;
 
+    /**
+     * asks the user to login the app
+     * checks the correctness of information by firebase
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,11 +105,14 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Signup.class));
+                startActivity(new Intent(MainActivity.this, Activity_Signup.class));
             }
         });
     }
 
+    /**
+     * checks the user's role (rider or driver)
+     */
     public void ifexits() {
         //get the current user's user ID
         userID = myFirebaseAuth.getCurrentUser().getUid();
@@ -117,13 +128,13 @@ public class MainActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(TAG, "Document exists!");
                         //go to the MainMenuR activity (Rider's Main Menu)
-                        startActivity(new Intent(MainActivity.this, MainMenuR.class));
+                        startActivity(new Intent(MainActivity.this, Activity_MainMenuR.class));
                         //if the user is not in the "rider" collection (which means it is in "driver" collection)
                         //the user's role is a driver
                     } else {
                         Log.d(TAG, "Document does not exist!");
                         //go to the MainMenuD activity (Driver's Main Menu)
-                        startActivity(new Intent(MainActivity.this, MainMenuD.class));
+                        startActivity(new Intent(MainActivity.this, Activity_MainMenuD.class));
                     }
                 } else {
                     Log.d(TAG, "Failed with: ", task.getException());
@@ -132,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //asks for permissions
+    /**
+     * asks for permissions including camera,storage and location
+     */
     public void checkPermission() {
         PermissionListener pl = new PermissionListener() {
             @Override

@@ -9,11 +9,17 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-//This is rider's main menu
-public class MainMenuR extends AppCompatActivity {
+/**
+ * this is rider's main menu
+ */
+public class Activity_MainMenuR extends AppCompatActivity {
 
     Button PostRequest, current_req, past_req, profileR, signoutR;
 
+    /**
+     * asks the rider to choose one task
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,7 @@ public class MainMenuR extends AppCompatActivity {
         current_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuR.this, CurrentRequest.class));
+                startActivity(new Intent(Activity_MainMenuR.this, CurrentRequest.class));
             }
         });
 
@@ -57,7 +63,7 @@ public class MainMenuR extends AppCompatActivity {
         profileR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuR.this, Profile.class));
+                startActivity(new Intent(Activity_MainMenuR.this, Activity_Profile.class));
             }
         });
 
@@ -66,7 +72,7 @@ public class MainMenuR extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainMenuR.this, MainActivity.class));
+                startActivity(new Intent(Activity_MainMenuR.this, MainActivity.class));
             }
         });
     }

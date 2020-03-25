@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile"
+    tools:context=".Activity_Profile"
     android:gravity="center_horizontal"
     android:background="@drawable/bg1"
     android:orientation="vertical">

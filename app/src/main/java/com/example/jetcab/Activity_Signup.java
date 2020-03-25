@@ -29,8 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-//This is Sign up activity
-public class Signup extends AppCompatActivity {
+/**
+ * @author Yingxin
+ * this is signup activity
+ */
+public class Activity_Signup extends AppCompatActivity {
 
     public static final String TAG = "TAG";
     EditText signupEmail, signupPassword;
@@ -43,6 +46,11 @@ public class Signup extends AppCompatActivity {
     FirebaseFirestore myFF;
     String userID;
 
+    /**
+     * asks the user to enter information
+     * store the information in firebase
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,13 +109,13 @@ public class Signup extends AppCompatActivity {
                 }
                 //check whether the user choose a role or not
                 else if (selectUp == -1) {
-                    Toast.makeText(Signup.this, "Please choose a role", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Signup.this, "Please choose a role", Toast.LENGTH_SHORT).show();
                 } else {
-                    myFirebaseAuth.createUserWithEmailAndPassword(emailUp, passwordUp).addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
+                    myFirebaseAuth.createUserWithEmailAndPassword(emailUp, passwordUp).addOnCompleteListener(Activity_Signup.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(Signup.this, "signup unsuccessfully, please try again. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Activity_Signup.this, "signup unsuccessfully, please try again. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             } else {
                                 //check if the username is used
                                 DocumentReference docu = myFF.collection("users_list").document(name);
@@ -204,7 +212,7 @@ public class Signup extends AppCompatActivity {
                                                             Log.d(TAG, "onFailure: " + e.toString());
                                                         }
                                                     });
-                                                    startActivity(new Intent(Signup.this, MainMenuR.class));
+                                                    startActivity(new Intent(Activity_Signup.this, Activity_MainMenuR.class));
                                                 } else {
                                                     //if the user sign up as a driver
                                                     //create "driver" collection and add the user's name as a value
@@ -223,7 +231,7 @@ public class Signup extends AppCompatActivity {
                                                             Log.d(TAG, "onFailure: " + e.toString());
                                                         }
                                                     });
-                                                    startActivity(new Intent(Signup.this, MainMenuD.class));
+                                                    startActivity(new Intent(Activity_Signup.this, Activity_MainMenuD.class));
                                                 }
                                             }
                                         } else {

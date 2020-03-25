@@ -2,7 +2,6 @@ package com.example.jetcab;
 
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
@@ -50,7 +49,7 @@ public class MainMenuRTest {
      */
     @Test
     public void checkActivity(){
-        solo.assertCurrentActivity("Not in correct Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in correct Activity", Activity_MainMenuR.class);
         Button br = (Button) solo.getView(R.id.signout_buttonR);
         solo.clickOnView(br);
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);

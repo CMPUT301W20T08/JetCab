@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -146,7 +145,7 @@ public class AcceptRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DocumentReference dF = myFF.collection("Requests").document(getIntent().getStringExtra("UserId"));
-                Request.AcceptedRequest(getIntent().getStringExtra("DriverID"), getIntent().getStringExtra("UserId"), dF);
+                Activity_Request.AcceptedRequest(getIntent().getStringExtra("DriverID"), getIntent().getStringExtra("UserId"), dF);
                 finish();
             }
         });

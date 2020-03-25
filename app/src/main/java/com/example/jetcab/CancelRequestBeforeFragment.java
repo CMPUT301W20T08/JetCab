@@ -61,10 +61,10 @@ public class CancelRequestBeforeFragment extends DialogFragment {
 
                                 if (documentSnapshot.exists()) {
                                     // Request exists in requests, delete
-                                    Request.CancelledRequest(userID, myFF.collection("Requests").document(userID));
+                                    Activity_Request.CancelledRequest(userID, myFF.collection("Requests").document(userID));
                             } else {
                                     // Request doesn't exist in requests, delete from Accepted Requests
-                                    Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
+                                    Activity_Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
                                 }
                         }
                     });

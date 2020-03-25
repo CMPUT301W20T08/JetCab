@@ -39,12 +39,12 @@
         <activity
             android:name=".CurrentRequest"
             android:label="@string/title_activity_current_request" />
-        <activity android:name=".Profile" />
-        <activity android:name=".MainMenuD" />
-        <activity android:name=".MainMenuR" />
-        <activity android:name=".Signup"
+        <activity android:name=".Activity_Profile" />
+        <activity android:name=".Activity_MainMenuD" />
+        <activity android:name=".Activity_MainMenuR" />
+        <activity android:name=".Activity_Signup"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Splash_Screen"
+        <activity android:name=".Activity_SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
