@@ -2,9 +2,7 @@ package com.example.jetcab;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -87,8 +85,8 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         LatLng sydney = new LatLng(53.518882, -113.453807);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        Request c = new Request(sydney, sydney, 300);
-        Request d = new Request(sydney, sydney, 300);
+        Activity_Request c = new Activity_Request(sydney, sydney, 300);
+        Activity_Request d = new Activity_Request(sydney, sydney, 300);
 
     }
 }

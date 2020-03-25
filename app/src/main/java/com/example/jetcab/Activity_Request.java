@@ -1,7 +1,6 @@
 package com.example.jetcab;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,7 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import static com.example.jetcab.Signup.TAG;
+import static com.example.jetcab.Activity_Signup.TAG;
 
 /**
  * @author chirag
@@ -30,7 +29,7 @@ import static com.example.jetcab.Signup.TAG;
 
 
 
-public class Request {
+public class Activity_Request {
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
     private static String userID;
@@ -50,7 +49,7 @@ public class Request {
 
      */
 
-    public Request(LatLng pickup, LatLng dropoff, float fare) {
+    public Activity_Request(LatLng pickup, LatLng dropoff, float fare) {
         ResponseOpenRequest();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
         CurrDateTime = simpleDateFormat.format(new Date());

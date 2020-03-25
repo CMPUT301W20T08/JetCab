@@ -3,7 +3,9 @@ package com.example.jetcab;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +21,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.List;
 
 
-//This is login activity
+/**
+ * @author Yingxin
+ * this is login activity
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
@@ -32,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore myFF;
     String userID;
 
+    /**
+     * asks the user to login the app
+     * checks the correctness of information by firebase
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setTitle("Login");  //set the tile "Login"
+
+        checkPermission();
 
         //need FirebaseAuth and FirebaseFirestore to login, and check collections and documents
         myFirebaseAuth = FirebaseAuth.getInstance();
@@ -45,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup);
+        signup.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         //check if a user has already logged
         //if there is no current user then call ifexits
@@ -88,12 +105,15 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Signup.class));
+                startActivity(new Intent(MainActivity.this, Activity_Signup.class));
             }
         });
     }
 
-    void ifexits() {
+    /**
+     * checks the user's role (rider or driver)
+     */
+    public void ifexits() {
         //get the current user's user ID
         userID = myFirebaseAuth.getCurrentUser().getUid();
         //check if the user is in "rider" collection
@@ -108,18 +128,38 @@ public class MainActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d(TAG, "Document exists!");
                         //go to the MainMenuR activity (Rider's Main Menu)
-                        startActivity(new Intent(MainActivity.this, MainMenuR.class));
+                        startActivity(new Intent(MainActivity.this, Activity_MainMenuR.class));
                         //if the user is not in the "rider" collection (which means it is in "driver" collection)
                         //the user's role is a driver
                     } else {
                         Log.d(TAG, "Document does not exist!");
                         //go to the MainMenuD activity (Driver's Main Menu)
-                        startActivity(new Intent(MainActivity.this, MainMenuD.class));
+                        startActivity(new Intent(MainActivity.this, Activity_MainMenuD.class));
                     }
                 } else {
                     Log.d(TAG, "Failed with: ", task.getException());
                 }
             }
         });
+    }
+
+    /**
+     * asks for permissions including camera,storage and location
+     */
+    public void checkPermission() {
+        PermissionListener pl = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+            }
+        };
+
+        TedPermission.with(MainActivity.this)
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET)
+                .check();
     }
 }
