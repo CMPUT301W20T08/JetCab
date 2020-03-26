@@ -48,7 +48,7 @@ public class SignupTest {
      */
     @Test
     public void checkActivity(){
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -57,7 +57,7 @@ public class SignupTest {
     @Test
     public void checkEmpty0() {
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -67,7 +67,7 @@ public class SignupTest {
     public void checkEmpty1(){
         solo.enterText((EditText) solo.getView(R.id.signup_email), "UItest2@gmail.com");
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -78,7 +78,7 @@ public class SignupTest {
         solo.enterText((EditText) solo.getView(R.id.signup_email), "UItest2@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.signup_password), "123456");
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -90,7 +90,7 @@ public class SignupTest {
         solo.enterText((EditText) solo.getView(R.id.signup_password), "123456");
         solo.enterText((EditText) solo.getView(R.id.signup_username), "UI TEST2");
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -103,7 +103,7 @@ public class SignupTest {
         solo.enterText((EditText) solo.getView(R.id.signup_username), "UI TEST2");
         solo.enterText((EditText) solo.getView(R.id.signup_phone), "5879999999");
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -114,7 +114,7 @@ public class SignupTest {
         solo.enterText((EditText) solo.getView(R.id.signup_email), "UItest2@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.signup_password), "12345");
         solo.clickOnButton("SIGN UP");
-        solo.assertCurrentActivity("Not in Signup Activity", Signup.class);
+        solo.assertCurrentActivity("Not in Signup Activity", Activity_Signup.class);
     }
 
     /**
@@ -130,7 +130,7 @@ public class SignupTest {
         solo.clickOnView(r);
         solo.clickOnButton("SIGN UP");
         solo.sleep(2000);
-        solo.assertCurrentActivity("Not in right Activity", Signup.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Signup.class);
     }
 
     /**
@@ -156,7 +156,7 @@ public class SignupTest {
         solo.clickOnView(d);
         solo.clickOnButton("SIGN UP");
         solo.sleep(2000);
-        solo.assertCurrentActivity("Not in right Activity", Signup.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Signup.class);
     }
 
     /**
@@ -172,7 +172,7 @@ public class SignupTest {
         solo.clickOnView(d);
         solo.clickOnButton("SIGN UP");
         solo.sleep(3000);
-        solo.assertCurrentActivity("Not in right Activity", Signup.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Signup.class);
     }
     /**
      * Close activity after each test

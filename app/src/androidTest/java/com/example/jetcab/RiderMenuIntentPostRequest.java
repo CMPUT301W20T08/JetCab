@@ -17,8 +17,8 @@ public class RiderMenuIntentPostRequest {
     private Solo solo;
 
     @Rule
-    public ActivityTestRule<MainMenuR> rule =
-            new ActivityTestRule<>(MainMenuR.class, true, true);
+    public ActivityTestRule<Activity_MainMenuR> rule =
+            new ActivityTestRule<>(Activity_MainMenuR.class, true, true);
 
     /**
      * Runs before all tests and creates solo instance.
@@ -43,11 +43,11 @@ public class RiderMenuIntentPostRequest {
      */
     @Test
     public void checkSwitchActivity() {
-        solo.assertCurrentActivity("Wrong Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_MainMenuR.class);
         solo.clickOnText("Post Requests");
 
         solo.waitForActivity("PostRequest");
-        solo.assertCurrentActivity("Wrong Activity", PostRequest.class);
+        solo.assertCurrentActivity("Wrong Activity", Activity_PostRequest.class);
     }
 
     /**

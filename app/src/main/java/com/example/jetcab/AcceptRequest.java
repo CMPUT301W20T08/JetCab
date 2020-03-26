@@ -3,15 +3,16 @@ package com.example.jetcab;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +32,7 @@ public class AcceptRequest extends AppCompatActivity {
 
     TextView username, email, phone, pickup, dropoff, fare;
     Button Accept;
+    ImageButton mapIcon;
     private FirebaseAuth myFirebaseAuth;
     private FirebaseFirestore myFF;
 
@@ -51,6 +53,7 @@ public class AcceptRequest extends AppCompatActivity {
         dropoff = findViewById(R.id.drop);
         fare = findViewById(R.id.fare);
         Accept = findViewById(R.id.Accept);
+        mapIcon = findViewById(R.id.map_icon_driver);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -116,6 +119,22 @@ public class AcceptRequest extends AppCompatActivity {
 
         fare.setText(getIntent().getStringExtra("fare"));
 
+        //click the map icon to show the start and end location on the map
+        final String start_lat = coordinates[0];
+        final String start_lng = coordinates[1];
+        final String end_lat = coordinates1[0];
+        final String end_lng = coordinates1[1];
+        mapIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Activity_DriverMapDisplay.class);
+                intent.putExtra("Start Lat", start_lat);
+                intent.putExtra("Start Lng", start_lng);
+                intent.putExtra("End Lat", end_lat);
+                intent.putExtra("End Lng", end_lng);
+                startActivity(intent);
+            }
+        });
 
 
         /**
@@ -126,11 +145,10 @@ public class AcceptRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DocumentReference dF = myFF.collection("Requests").document(getIntent().getStringExtra("UserId"));
-                Request.AcceptedRequest(getIntent().getStringExtra("DriverID"), getIntent().getStringExtra("UserId"), dF);
+                Activity_Request.AcceptedRequest(getIntent().getStringExtra("DriverID"), getIntent().getStringExtra("UserId"), dF);
                 finish();
             }
         });
-
 
     }
 }
