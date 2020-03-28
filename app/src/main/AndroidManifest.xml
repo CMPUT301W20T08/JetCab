@@ -67,7 +67,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity_RiderMapDisplay" />
-        <activity android:name=".Activity_DriverCurrentRequest" />
+        <activity android:name=".Activity_DriverCurrentRequest"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity_DriverMapDisplay" />
         <activity
             android:name=".MainActivity"

@@ -73,7 +73,7 @@ public class Activity_DriverMapDisplay extends AppCompatActivity implements OnMa
         LatLngBounds bounds = builder.build();
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
-        int padding = (int) (width * 0.10);
+        int padding = (int) (width * 0.40);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
         googleMap.moveCamera(cameraUpdate);
     }
