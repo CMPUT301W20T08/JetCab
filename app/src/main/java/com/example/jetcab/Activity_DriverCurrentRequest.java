@@ -1,5 +1,6 @@
 package com.example.jetcab;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -11,12 +12,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,8 +40,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -62,6 +71,8 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
     String status;
     public static String from_address, to_address;
     public static Double from_lat, from_lng, to_lat, to_lng;
+    Dialog dialog;
+    String username, phone, email;
 
     /**
      * check the status of the request from firebase, and show the status of current request
@@ -95,6 +106,7 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
                         waitingStatus();
                     } else if (status.matches("Confirmed") || status.matches("Pickup")
                             || status.matches("On The Way") || status.matches("Arrived")) { //the in the progress status
+                        getRiderInfo(queryDocumentSnapshots);
                         progressStatus(queryDocumentSnapshots);
                     }
 
@@ -158,6 +170,7 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
      */
     public void progressStatus(QuerySnapshot queryDocumentSnapshots) {
         setContentView(R.layout.driver_current_request_progress);
+        dialog = new Dialog(this);
         TextView pickup_text = findViewById(R.id.pickup_text_view);
         TextView on_the_way_text = findViewById(R.id.on_the_way_text_view);
         TextView arrived_text = findViewById(R.id.arrived_text_view);
@@ -235,6 +248,56 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.map_p, new MapFragment());
         ft.commit();
+    }
+
+    /**
+     * get the rider's profile from firebase
+     * @param queryDocumentSnapshots
+     */
+    public void getRiderInfo(QuerySnapshot queryDocumentSnapshots) {
+        DocumentReference documentReference = myFF.collection("users").
+                document(queryDocumentSnapshots.getDocuments().get(0).getId());
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        username = document.get("username").toString();
+                        phone = document.get("phone").toString();
+                        email = document.get("email").toString();
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    /**
+     * show the popup window when click the rider's profile button
+     * @param view
+     */
+    public void ShowProfile(View view) {
+        dialog.setContentView(R.layout.rider_profile_popup_window);
+        ImageButton ok_button = dialog.findViewById(R.id.ok_image_button);
+        TextView username_text = dialog.findViewById(R.id.rider_username_text);
+        TextView phone_text = dialog.findViewById(R.id.rider_phone_text);
+        TextView email_text = dialog.findViewById(R.id.rider_email_text);
+
+        username_text.setText(username);
+        phone_text.setText(phone);
+        email_text.setText(email);
+
+        ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     /**
