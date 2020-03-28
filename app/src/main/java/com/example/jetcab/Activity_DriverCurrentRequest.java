@@ -2,6 +2,7 @@ package com.example.jetcab;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -205,7 +206,12 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
             //set the scan button visible
             scan_button.setVisibility(Button.VISIBLE);
             //click the scan button to pay
-            //...
+            scan_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), Activity_QRcode.class));
+                }
+            });
         }
 
         pickup_text.setOnClickListener(new View.OnClickListener() {
@@ -234,6 +240,8 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
                 Map<String, Object> update = new HashMap<>();
                 update.put("status", "Arrived");
                 documentReference.update(update);
+                //scan qr code
+                startActivity(new Intent(getApplicationContext(), Activity_QRcode.class));
             }
         });
 
