@@ -22,6 +22,7 @@ public class Activity_scanCode extends AppCompatActivity implements ZXingScanner
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("QR Code");
         view = new ZXingScannerView(this);
         setContentView(view);
     }

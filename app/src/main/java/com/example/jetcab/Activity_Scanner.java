@@ -29,6 +29,8 @@ public class Activity_Scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__scanner);
 
+        this.setTitle("QR Scanner");
+
         scan = findViewById(R.id.sc_btn);
         result = findViewById(R.id.result);
         done_btn = findViewById(R.id.done_btn);

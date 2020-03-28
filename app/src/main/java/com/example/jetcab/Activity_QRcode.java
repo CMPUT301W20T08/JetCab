@@ -48,6 +48,8 @@ public class Activity_QRcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__qrcode);
 
+        this.setTitle("QR Code");
+
         qr_button = findViewById(R.id.qr_button);
         qr_image = findViewById(R.id.qr_image);
         done = findViewById(R.id.done);
