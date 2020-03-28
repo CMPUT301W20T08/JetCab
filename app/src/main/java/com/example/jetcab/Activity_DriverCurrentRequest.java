@@ -1,17 +1,21 @@
 package com.example.jetcab;
 
+import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -161,6 +165,13 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
         status_text.setText(status);
         ImageButton scan_button = findViewById(R.id.scan_image_button);
         status_text.setPaintFlags(status_text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        //notify when the user loses the internet connection
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork == null) {
+            Toast.makeText(getApplicationContext(), "Please check the Internet Connection", Toast.LENGTH_LONG).show();
+        }
 
         final DocumentReference documentReference = myFF.collection("Accepted Requests").
                 document(queryDocumentSnapshots.getDocuments().get(0).getId());
