@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * @author Yingxin
@@ -57,7 +58,8 @@ public class Activity_Scanner extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Toast.makeText(Activity_Scanner.this, "Completed! Go back to main menu.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Activity_Scanner.this, Activity_MainMenuD.class));
             }
         });
     }
