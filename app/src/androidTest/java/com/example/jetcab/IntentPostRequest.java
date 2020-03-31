@@ -11,9 +11,11 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Test class for MainMenR. All the UI tests are written here. Robotium test framework is used
+ * @author Joyce
+ * Test class for switching from MainMenR to PostRequest activity.
+ * All the UI tests are written here. Robotium test framework is used
  */
-public class RiderMenuIntentPostRequest {
+public class IntentPostRequest {
     private Solo solo;
 
     @Rule
