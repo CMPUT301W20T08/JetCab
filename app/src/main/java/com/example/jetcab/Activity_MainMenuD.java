@@ -6,17 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-//This is driver's main menu
-public class MainMenuD extends AppCompatActivity {
+/**
+ * this is driver's main menu
+ */
+public class Activity_MainMenuD extends AppCompatActivity {
 
     //    Button signoutD;
     //    TextView profileD;
     Button search_req_button, current_reqs_button, past_reqs_button, profile_button, signoutD;
 
+    /**
+     * asks the driver to choose one task
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +39,14 @@ public class MainMenuD extends AppCompatActivity {
         search_req_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, Driver_Search_Request.class));
+                startActivity(new Intent(Activity_MainMenuD.this, Driver_Search_Request.class));
             }
         });
         //driver should be able to see their current request.
         current_reqs_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, CurrentRequest.class));
+                startActivity(new Intent(Activity_MainMenuD.this, Activity_DriverCurrentRequest.class));
             }
         });
         //view drivers previously completed trips
@@ -55,7 +60,7 @@ public class MainMenuD extends AppCompatActivity {
         profile_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuD.this, Profile.class));
+                startActivity(new Intent(Activity_MainMenuD.this, Activity_Profile.class));
             }
         });
         //Sign out if the user click on signout button
@@ -63,7 +68,7 @@ public class MainMenuD extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainMenuD.this, MainActivity.class));
+                startActivity(new Intent(Activity_MainMenuD.this, MainActivity.class));
             }
         });
     }

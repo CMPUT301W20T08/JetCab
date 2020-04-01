@@ -93,13 +93,30 @@
             />
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ride Information"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Ride Information"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
+        <ImageButton
+            android:id="@+id/map_icon_driver"
+            android:background="#00000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/map_image"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

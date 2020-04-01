@@ -49,7 +49,7 @@ public class MainMenuDTest {
      */
     @Test
     public void checkActivity(){
-        solo.assertCurrentActivity("Not in correct Activity", MainMenuD.class);
+        solo.assertCurrentActivity("Not in correct Activity", Activity_MainMenuD.class);
         Button bd = (Button) solo.getView(R.id.signout_buttonD);
         solo.clickOnView(bd);
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);

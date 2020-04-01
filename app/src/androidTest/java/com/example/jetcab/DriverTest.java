@@ -37,7 +37,7 @@ public class DriverTest {
         solo.enterText ( (EditText)solo.getView ( R.id.login_email ),"JetCabDriver@JetCab.com" );
         solo.enterText ( (EditText)solo.getView ( R.id.login_password ),"JetCabDriver" );
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity ( "WrongActivity", MainMenuD.class);
+        solo.assertCurrentActivity ( "WrongActivity", Activity_MainMenuD.class);
         solo.clickOnButton ( "SIGNOUT" );
         solo.assertCurrentActivity ( "Wrong Activity",MainActivity.class );
 
@@ -50,13 +50,13 @@ public class DriverTest {
         solo.enterText ( (EditText)solo.getView ( R.id.login_email ),"JetCabDriver@JetCab.com" );
         solo.enterText ( (EditText)solo.getView ( R.id.login_password ),"JetCabDriver" );
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity ( "WrongActivity", MainMenuD.class);
-        new Request ( new LatLng (53.518882, -113.453807 ),new LatLng (53.538882, -113.463807 ),200 );
+        solo.assertCurrentActivity ( "WrongActivity", Activity_MainMenuD.class);
+        new Activity_Request( new LatLng (53.518882, -113.453807 ),new LatLng (53.538882, -113.463807 ),200 );
         solo.clickOnButton ( 0);
         solo.assertCurrentActivity ( "Wrong Activity", Driver_Search_Request.class );
         solo.searchText ( "Request# 1",1 );
         solo.goBack ();
-        solo.assertCurrentActivity ( "WrongActivity", MainMenuD.class);
+        solo.assertCurrentActivity ( "WrongActivity", Activity_MainMenuD.class);
         solo.clickOnButton ( "SIGNOUT" );
         solo.assertCurrentActivity ( "Wrong Activity",MainActivity.class );
     }
@@ -67,13 +67,13 @@ public class DriverTest {
         solo.enterText ( (EditText)solo.getView ( R.id.login_email ),"JetCabDriver@JetCab.com" );
         solo.enterText ( (EditText)solo.getView ( R.id.login_password ),"JetCabDriver" );
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity ( "WrongActivity", MainMenuD.class);
+        solo.assertCurrentActivity ( "WrongActivity", Activity_MainMenuD.class);
         solo.clickOnButton ( 0);
         solo.assertCurrentActivity ( "Wrong Activity", Driver_Search_Request.class );
         solo.searchText ( "Request# 1",1 );
         solo.clickOnText ( "Request# 1" );
         solo.clickOnButton ( "ACCEPT" );
-        solo.assertCurrentActivity ( "WrongActivity", MainMenuD.class);
+        solo.assertCurrentActivity ( "WrongActivity", Activity_MainMenuD.class);
         solo.clickOnButton ( "SIGNOUT" );
         solo.assertCurrentActivity ( "Wrong Activity",MainActivity.class );
     }

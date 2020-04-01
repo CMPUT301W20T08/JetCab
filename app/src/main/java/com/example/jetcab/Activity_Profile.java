@@ -19,8 +19,11 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-//This is user's profile
-public class Profile extends AppCompatActivity {
+/**
+ * @author Yingxin
+ * this is user's profile
+ */
+public class Activity_Profile extends AppCompatActivity {
 
     TextView name, email, phone, back;
     FirebaseAuth myFirebaseAuth;
@@ -29,6 +32,11 @@ public class Profile extends AppCompatActivity {
     AlertDialog diaE, diaP;
     EditText editE, editP;
 
+    /**
+     * shows the user's profile
+     * able to edit email and phone no
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +82,7 @@ public class Profile extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(Profile.this, "Updated Successfully",
+                                Toast.makeText(Activity_Profile.this, "Updated Successfully",
                                         Toast.LENGTH_SHORT).show();
                             }
 
@@ -117,7 +125,7 @@ public class Profile extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(Profile.this, "Updated Successfully",
+                                Toast.makeText(Activity_Profile.this, "Updated Successfully",
                                         Toast.LENGTH_SHORT).show();
                             }
 

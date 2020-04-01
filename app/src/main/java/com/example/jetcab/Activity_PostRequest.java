@@ -2,14 +2,11 @@ package com.example.jetcab;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,20 +21,19 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.firestore.local.LocalViewChanges;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class PostRequest extends AppCompatActivity {
+/**
+ * @author Joyce, ...(who did the fare part!!!)
+ * enable posting request for riders
+ */
+public class Activity_PostRequest extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputLayout textInputLayout_from;
     TextInputEditText editText_from;
@@ -50,6 +46,10 @@ public class PostRequest extends AppCompatActivity {
     Double start_lat, start_lng, end_lat, end_lng;
     private static final int LAT_LNG_REQUEST_CODE = 0;
 
+    /**
+     * be able to specify the start and end location on map when click the map icon
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,21 +74,6 @@ public class PostRequest extends AppCompatActivity {
         //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
         editText_from = findViewById(R.id.from_editText);
-        /*//after the user stop typing, get the start lat and lng
-        editText_from.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                start_location = editText_from.getText().toString();
-                if (!hasFocus) {
-                    if (!start_location.matches("")) {
-                        Intent intent = new Intent(v.getContext(), GetLatAndLng.class);
-                        intent.putExtra("START LOCATION", start_location);
-                        intent.putExtra("TYPE", "from");
-                        startActivityForResult(intent, LAT_LNG_REQUEST_CODE);
-                    }
-                }
-            }
-        });*/
 
         //click the map icon to specify start location on map
         textInputLayout_from.setEndIconOnClickListener(new View.OnClickListener() {
@@ -99,7 +84,7 @@ public class PostRequest extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Enter the Start Location", Toast.LENGTH_LONG).show();
                 } else {
                     if (isAddressValid(start_location)) {
-                        Intent intent = new Intent(v.getContext(), MapDisplay.class);
+                        Intent intent = new Intent(v.getContext(), Activity_RiderMapDisplay.class);
                         intent.putExtra("START LOCATION", start_location);
                         intent.putExtra("TYPE", "from");
                         //get the lat and lng from MapDisplay.class
@@ -116,21 +101,6 @@ public class PostRequest extends AppCompatActivity {
 
         textInputLayout_to = findViewById(R.id.to_textField);
         editText_to = findViewById(R.id.to_editText);
-        /*//after the user stop typing, get the end lat and lng
-        editText_to.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                end_location = editText_to.getText().toString();
-                if (!hasFocus) {
-                    if (!end_location.matches("")) {
-                        Intent intent = new Intent(v.getContext(), GetLatAndLng.class);
-                        intent.putExtra("END LOCATION", end_location);
-                        intent.putExtra("TYPE", "to");
-                        startActivityForResult(intent, LAT_LNG_REQUEST_CODE);
-                    }
-                }
-            }
-        });*/
 
         //click the map icon to specify end location on map
         textInputLayout_to.setEndIconOnClickListener(new View.OnClickListener() {
@@ -141,7 +111,7 @@ public class PostRequest extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Enter the End Location", Toast.LENGTH_LONG).show();
                 } else {
                     if (isAddressValid(end_location)) {
-                        Intent intent = new Intent(v.getContext(), MapDisplay.class);
+                        Intent intent = new Intent(v.getContext(), Activity_RiderMapDisplay.class);
                         intent.putExtra("END LOCATION", end_location);
                         intent.putExtra("TYPE", "to");
                         startActivity(intent);
@@ -154,15 +124,6 @@ public class PostRequest extends AppCompatActivity {
                 }
             }
         });
-
-//        //pressing the fare textview updates fare
-//        final TextView fare = findViewById(R.id.fair_fare_text);
-//        fare.setOnClickListener(new View.OnClickListener()) {
-//            @Override
-//            public void onClick(View v) {
-//                fare.setText(getFare(start_location, end_location));
-//            }
-//        });
 
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
@@ -180,19 +141,6 @@ public class PostRequest extends AppCompatActivity {
             }
         });
     }
-
-    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LAT_LNG_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                start_lat = data.getDoubleExtra("START LAG", 0.00);
-                start_lng = data.getDoubleExtra("START LAG", 0.00);
-                end_lat = data.getDoubleExtra("END LAG", 0.00);
-                end_lng = data.getDoubleExtra("END LNG", 0.00);
-            }
-        }
-
-    }*/
 
     /**
      * Returns the amount of the fare based on a fair calculation.
@@ -220,6 +168,9 @@ public class PostRequest extends AppCompatActivity {
         return String.format("$%.2f", amount); //convert to float, divide by 1000 to get km
     }
 
+    /**
+     * get the address of current location
+     */
     private void getLastLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
@@ -247,6 +198,11 @@ public class PostRequest extends AppCompatActivity {
         });
     }
 
+    /**
+     * check if the location is valid
+     * @param location
+     * @return true/false
+     */
     public boolean isAddressValid(String location) {
         Geocoder coder = new Geocoder(getApplicationContext(), Locale.getDefault());
         try {
@@ -260,7 +216,11 @@ public class PostRequest extends AppCompatActivity {
         return true;
     }
 
-
+    /**
+     * get the latitude of location
+     * @param location
+     * @return latitude
+     */
     public Double getLat(String location) {
         Address address;
         Double lat = null;
@@ -276,6 +236,11 @@ public class PostRequest extends AppCompatActivity {
         return lat;
     }
 
+    /**
+     * get the longitude of location
+     * @param location
+     * @return longitude
+     */
     public Double getLng(String location) {
         Address address;
         Double lng = null;

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-//This is Sign up activity
-public class Signup extends AppCompatActivity {
+/**
+ * @author Yingxin
+ * this is signup activity
+ */
+public class Activity_Signup extends AppCompatActivity {
 
     public static final String TAG = "TAG";
     EditText signupEmail, signupPassword;
@@ -42,6 +46,11 @@ public class Signup extends AppCompatActivity {
     FirebaseFirestore myFF;
     String userID;
 
+    /**
+     * asks the user to enter information
+     * store the information in firebase
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +70,7 @@ public class Signup extends AppCompatActivity {
         signupGroup = findViewById(R.id.signup_roles);
         signupRider = findViewById(R.id.signup_rider);
         signupDriver = findViewById(R.id.signup_driver);
+        login.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         //if the user clicks on sign up button
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +109,13 @@ public class Signup extends AppCompatActivity {
                 }
                 //check whether the user choose a role or not
                 else if (selectUp == -1) {
-                    Toast.makeText(Signup.this, "Please choose a role", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Signup.this, "Please choose a role", Toast.LENGTH_SHORT).show();
                 } else {
-                    myFirebaseAuth.createUserWithEmailAndPassword(emailUp, passwordUp).addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
+                    myFirebaseAuth.createUserWithEmailAndPassword(emailUp, passwordUp).addOnCompleteListener(Activity_Signup.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(Signup.this, "signup unsuccessfully, please try again. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Activity_Signup.this, "signup unsuccessfully, please try again. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             } else {
                                 //check if the username is used
                                 DocumentReference docu = myFF.collection("users_list").document(name);
@@ -143,6 +153,7 @@ public class Signup extends AppCompatActivity {
                                                 Map<String, Object> users = new HashMap<>();
                                                 //add name and role value into the user's field
                                                 users.put("username", name);
+                                                users.put("uid",userID);
                                                 if (signupRider.isChecked()) {
                                                     users.put("role", "rider");
                                                 } else {
@@ -167,6 +178,8 @@ public class Signup extends AppCompatActivity {
                                                 u.put("username", name);
                                                 u.put("email", emailUp);
                                                 u.put("phone", phone);
+                                                u.put("thumbup",0);
+                                                u.put("thumbdown",0);
                                                 if (signupRider.isChecked()) {
                                                     u.put("role", "rider");
                                                 } else {
@@ -202,7 +215,7 @@ public class Signup extends AppCompatActivity {
                                                             Log.d(TAG, "onFailure: " + e.toString());
                                                         }
                                                     });
-                                                    startActivity(new Intent(Signup.this, MainMenuR.class));
+                                                    startActivity(new Intent(Activity_Signup.this, Activity_MainMenuR.class));
                                                 } else {
                                                     //if the user sign up as a driver
                                                     //create "driver" collection and add the user's name as a value
@@ -221,7 +234,7 @@ public class Signup extends AppCompatActivity {
                                                             Log.d(TAG, "onFailure: " + e.toString());
                                                         }
                                                     });
-                                                    startActivity(new Intent(Signup.this, MainMenuD.class));
+                                                    startActivity(new Intent(Activity_Signup.this, Activity_MainMenuD.class));
                                                 }
                                             }
                                         } else {
