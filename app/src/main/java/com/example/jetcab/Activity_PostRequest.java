@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -172,6 +173,7 @@ public class Activity_PostRequest extends AppCompatActivity {
      */
     @SuppressLint("DefaultLocale")
     private void getFare(String start, String end) {
+        DecimalFormat rounded = new DecimalFormat("#.##");
         float[] distance = new float[1];
         Double startLat = getLat(start);
         Double startLng = getLng(start);
@@ -184,10 +186,11 @@ public class Activity_PostRequest extends AppCompatActivity {
         if (!(startLat == null) & !(startLng == null) & !(endLat == null) & !(endLng == null)) {
             Location.distanceBetween(startLat, startLng, endLat, endLng, distance);
             Log.d("distance", "Distance: " + (distance[0]));
-            amount = (base + perKM*distance[0]/1000);
+            amount = base + perKM*distance[0]/1000;
         }
         fare_estimate.setText(String.format("$%.2f", amount)); //need to edit
         fare.setText(String.format("$%.2f", amount));
+        amount = Float.parseFloat(rounded.format(amount));
         this.final_fare = (float) amount;
     }
 
