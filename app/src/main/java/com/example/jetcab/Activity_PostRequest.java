@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -42,7 +44,9 @@ public class Activity_PostRequest extends AppCompatActivity {
     Button post_button;
     Geocoder geocoder;
     String start_location, end_location;
-    TextView fare;
+    TextView fare_estimate;
+    EditText fare;
+    float final_fare;
     Double start_lat, start_lng, end_lat, end_lng;
     private static final int LAT_LNG_REQUEST_CODE = 0;
 
@@ -50,6 +54,7 @@ public class Activity_PostRequest extends AppCompatActivity {
      * be able to specify the start and end location on map when click the map icon
      * @param savedInstanceState
      */
+//    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,9 @@ public class Activity_PostRequest extends AppCompatActivity {
         //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
         editText_from = findViewById(R.id.from_editText);
+        fare_estimate = findViewById(R.id.fair_fare_text);
+        fare = findViewById(R.id.offered_payment_text);
+//        fare.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         //click the map icon to specify start location on map
         textInputLayout_from.setEndIconOnClickListener(new View.OnClickListener() {
@@ -90,8 +98,7 @@ public class Activity_PostRequest extends AppCompatActivity {
                         //get the lat and lng from MapDisplay.class
                         startActivity(intent);
                         //update fare fair
-                        final TextView fare = findViewById(R.id.fair_fare_text);
-                        fare.setText(getFare(start_location, end_location));
+                        getFare(start_location, end_location);
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid Start Location Address", Toast.LENGTH_LONG).show();
                     }
@@ -116,14 +123,23 @@ public class Activity_PostRequest extends AppCompatActivity {
                         intent.putExtra("TYPE", "to");
                         startActivity(intent);
                         //update fair fare
-                        final TextView fare = findViewById(R.id.fair_fare_text);
-                        fare.setText(getFare(start_location, end_location));
+                        getFare(start_location, end_location);
+
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid End Location Address", Toast.LENGTH_LONG).show();
                     }
                 }
             }
         });
+
+        //edit amount of money
+//        fare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
 
         //post and save the information of ride, end the activity
         post_button = findViewById(R.id.post_button);
@@ -133,8 +149,14 @@ public class Activity_PostRequest extends AppCompatActivity {
                 // check whether the input address is valid
                 if (isAddressValid(editText_from.getText().toString()) && !start_location.matches("")
                         && !end_location.matches("") && isAddressValid(editText_to.getText().toString())) {
-                    //...
+
+                    LatLng pickup = new LatLng(getLat(start_location) , getLng(start_location));
+                    LatLng dropoff = new LatLng(getLat(end_location) , getLng(end_location));
+
+                    Activity_Request post = new Activity_Request(pickup, dropoff, final_fare);
+
                     finish();
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Locations Address", Toast.LENGTH_LONG).show();
                 }
@@ -147,10 +169,9 @@ public class Activity_PostRequest extends AppCompatActivity {
      * Fares calculated by base amount + price per KM.
      * @param start string address of starting/pickup location
      * @param end string address of end/dropoff location
-     * @return a string containing the fare amount
      */
     @SuppressLint("DefaultLocale")
-    private String getFare(String start, String end) {
+    private void getFare(String start, String end) {
         float[] distance = new float[1];
         Double startLat = getLat(start);
         Double startLng = getLng(start);
@@ -165,7 +186,9 @@ public class Activity_PostRequest extends AppCompatActivity {
             Log.d("distance", "Distance: " + (distance[0]));
             amount = (base + perKM*distance[0]/1000);
         }
-        return String.format("$%.2f", amount); //convert to float, divide by 1000 to get km
+        fare_estimate.setText(String.format("$%.2f", amount)); //need to edit
+        fare.setText(String.format("$%.2f", amount));
+        this.final_fare = (float) amount;
     }
 
     /**

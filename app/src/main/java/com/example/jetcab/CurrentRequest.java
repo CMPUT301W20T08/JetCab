@@ -80,13 +80,14 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
 
-        LatLng sydney = new LatLng(53.518882, -113.453807);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        Activity_Request c = new Activity_Request(sydney, sydney, 300);
-        Activity_Request d = new Activity_Request(sydney, sydney, 300);
+
+        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(53.518882, -113.453807);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        Activity_Request c = new Activity_Request(sydney, sydney, 300);
+//        Activity_Request d = new Activity_Request(sydney, sydney, 300);
 
     }
 }
