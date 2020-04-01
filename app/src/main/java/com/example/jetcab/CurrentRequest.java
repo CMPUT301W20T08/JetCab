@@ -3,6 +3,9 @@ package com.example.jetcab;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,15 +32,25 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     private TextView status, wait;
     private Button cancel_button;
+    private LatLng pickup, dropoff;
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
     private static String userID;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_request);
+
+        try {
+            Intent intent = getIntent();
+            Bundle coords_bun = intent.getParcelableExtra("COORDS");
+            pickup = coords_bun.getParcelable("PICKUP");
+            dropoff = coords_bun.getParcelable("DROPOFF");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -71,8 +86,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -81,6 +95,17 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        MarkerOptions pickup_marker = new MarkerOptions().position(pickup).title("Pickup");
+        MarkerOptions dropoff_marker = new MarkerOptions().position(dropoff).title("Dropoff");
+        mMap.addMarker(pickup_marker);
+        mMap.addMarker(dropoff_marker);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(pickup_marker.getPosition());
+        builder.include(dropoff_marker.getPosition());
+        LatLngBounds marker_bounds = builder.build();
+
+        CameraUpdateFactory.newLatLngBounds(marker_bounds, 0);
 
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(53.518882, -113.453807);

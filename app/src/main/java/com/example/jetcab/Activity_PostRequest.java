@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,18 +38,19 @@ import java.util.Locale;
  * enable posting request for riders
  */
 public class Activity_PostRequest extends AppCompatActivity {
-    FusedLocationProviderClient fusedLocationProviderClient;
-    TextInputLayout textInputLayout_from;
-    TextInputEditText editText_from;
-    TextInputLayout textInputLayout_to;
-    TextInputEditText editText_to;
-    Button post_button;
-    Geocoder geocoder;
-    String start_location, end_location;
-    TextView fare_estimate;
-    EditText fare;
-    float final_fare;
-    Double start_lat, start_lng, end_lat, end_lng;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private TextInputLayout textInputLayout_from;
+    private TextInputEditText editText_from;
+    private TextInputLayout textInputLayout_to;
+    private TextInputEditText editText_to;
+    private Geocoder geocoder;
+    private String start_location, end_location;
+    private TextView fare_estimate;
+    private EditText fare;
+    private float final_fare;
+    private Button post_button;
+    private ImageButton decrease_fare;
+    private ImageButton increase_fare;
     private static final int LAT_LNG_REQUEST_CODE = 0;
 
     /**
@@ -64,10 +66,10 @@ public class Activity_PostRequest extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        //get the current location latitude and longitude
-        //get the current address
+        //get the current location latitude and longitude and current address
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         geocoder = new Geocoder(this, Locale.getDefault());
+
         //check whether the location permission is open
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -77,12 +79,10 @@ public class Activity_PostRequest extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Turn on the Location Permission", Toast.LENGTH_LONG).show();
         }
 
-        //click the map icon to specify start location on map
         textInputLayout_from = findViewById(R.id.from_textField);
         editText_from = findViewById(R.id.from_editText);
         fare_estimate = findViewById(R.id.fair_fare_text);
         fare = findViewById(R.id.offered_payment_text);
-//        fare.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         //click the map icon to specify start location on map
         textInputLayout_from.setEndIconOnClickListener(new View.OnClickListener() {
@@ -133,13 +133,26 @@ public class Activity_PostRequest extends AppCompatActivity {
             }
         });
 
+        decrease_fare = findViewById(R.id.minus_payment_button);
+        increase_fare = findViewById(R.id.add_payment_button);
+
         //edit amount of money
-//        fare.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        decrease_fare.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onClick(View v) {
+                final_fare -= 1.00;
+                fare.setText(String.format("$%.2f", final_fare));
+            }
+        });
+        increase_fare.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onClick(View v) {
+                final_fare += 1.00;
+                fare.setText(String.format("$%.2f", final_fare));
+            }
+        });
 
 
         //post and save the information of ride, end the activity
@@ -155,8 +168,16 @@ public class Activity_PostRequest extends AppCompatActivity {
                     LatLng dropoff = new LatLng(getLat(end_location) , getLng(end_location));
 
                     Activity_Request post = new Activity_Request(pickup, dropoff, final_fare);
-
                     finish();
+
+                    Intent current_request_intent = new Intent(v.getContext(), CurrentRequest.class); //opens current request activity
+
+                    Bundle coords = new Bundle();
+                    coords.putParcelable("PICKUP", pickup);   //https://stackoverflow.com/questions/16134682/how-to-send-a-latlng-instance-to-new-intent
+                    coords.putParcelable("DROPOFF", dropoff);
+                    current_request_intent.putExtra("COORDS", coords);
+
+                    startActivity(current_request_intent);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Locations Address", Toast.LENGTH_LONG).show();
@@ -173,7 +194,7 @@ public class Activity_PostRequest extends AppCompatActivity {
      */
     @SuppressLint("DefaultLocale")
     private void getFare(String start, String end) {
-        DecimalFormat rounded = new DecimalFormat("#.##");
+        DecimalFormat rounded = new DecimalFormat("0.00");
         float[] distance = new float[1];
         Double startLat = getLat(start);
         Double startLng = getLng(start);
@@ -183,15 +204,16 @@ public class Activity_PostRequest extends AppCompatActivity {
         double base = 5.0;
         double amount = 0;
 
-        if (!(startLat == null) & !(startLng == null) & !(endLat == null) & !(endLng == null)) {
+        if (!(startLat == null) & !(startLng == null) & !(endLat == null) & !(endLng == null)) { //calculates the fare
             Location.distanceBetween(startLat, startLng, endLat, endLng, distance);
             Log.d("distance", "Distance: " + (distance[0]));
             amount = base + perKM*distance[0]/1000;
         }
-        fare_estimate.setText(String.format("$%.2f", amount)); //need to edit
-        fare.setText(String.format("$%.2f", amount));
-        amount = Float.parseFloat(rounded.format(amount));
-        this.final_fare = (float) amount;
+
+        String strAmount = String.format("%.2f", amount);
+        fare_estimate.setText(strAmount);
+        fare.setText(strAmount);
+        this.final_fare = Float.parseFloat(strAmount);
     }
 
     /**

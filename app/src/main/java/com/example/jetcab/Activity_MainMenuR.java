@@ -2,6 +2,8 @@ package com.example.jetcab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +49,9 @@ public class Activity_MainMenuR extends AppCompatActivity {
         current_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Activity_MainMenuR.this, CurrentRequest.class));
+//                startActivity(new Intent(Activity_MainMenuR.this, CurrentRequest.class));
+                Intent current_request_intent = new Intent(v.getContext(), CurrentRequest.class);
+                startActivity(current_request_intent);
             }
         });
 
