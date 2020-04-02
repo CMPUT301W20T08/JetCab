@@ -8,132 +8,69 @@
     android:background="#f5f5f4"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <Button
+        android:id="@+id/search_req"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:text="Search Requests"
+        android:textStyle="bold"
+        android:background="#e8e8e8"
+        android:textSize="25sp"
+        />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="Driver's Main Menu"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <ImageButton
-                android:id="@+id/logout_d_image_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="15dp"
-                android:background="@color/colorPrimary"
-                android:src="@drawable/logout" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/current_reqD"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="My Current Requests"
+        android:textStyle="bold"
+        android:background="#e8e8e8"
+        android:textSize="25sp"/>
 
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:background="@drawable/rounded_bg"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="6dp">
-
-            <Button
-                android:id="@+id/search_req"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:text="Search Requests"
-                android:textStyle="bold"
-                android:background="#00000000"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_bg"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="6dp">
-
-            <Button
-                android:id="@+id/current_reqD"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:text="My Current Requests"
-                android:textStyle="bold"
-                android:background="#00000000"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/past_reqD"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Past Requests"
+        android:background="#e8e8e8"
+        android:textSize="25sp"/>
 
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:background="@drawable/rounded_bg"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="6dp">
+    <Button
+        android:id="@+id/profileD"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="My Profile"
+        android:background="#e8e8e8"
+        android:textSize="25sp"/>
 
-            <Button
-                android:id="@+id/past_reqD"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginTop="75dp"
-                android:text="Past Requests"
-                android:background="#00000000"
-                android:textSize="20dp"/>
+    <Button
+        android:id="@+id/signout_buttonD"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="140dp"
+        android:background="#44b0c9"
+        android:textColor="@color/quantum_white_100"
+        android:text="SIGNOUT" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_bg"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="6dp">
-
-            <Button
-                android:id="@+id/profileD"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:text="My Profile"
-                android:textStyle="bold"
-                android:background="#00000000"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.85"
+        android:background="@drawable/bg3"/>
 </LinearLayout>
