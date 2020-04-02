@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class Activity_MainMenuR extends AppCompatActivity {
 
-    Button PostRequest, current_req, past_req, profileR, signoutR;
+    Button PostRequest, current_req, past_req, profileR;
+    ImageButton signoutR;
 
     /**
      * asks the rider to choose one task
@@ -28,10 +30,7 @@ public class Activity_MainMenuR extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_r);
 
-        //set the tile "Rider's Main Menu"
-        this.setTitle("Rider Main Menu");
-
-        signoutR = findViewById(R.id.signout_buttonR);
+        signoutR = findViewById(R.id.logout_r_image_button);
         profileR = findViewById(R.id.profileR);
         PostRequest = findViewById(R.id.postrequest);
         current_req = findViewById(R.id.current_req);

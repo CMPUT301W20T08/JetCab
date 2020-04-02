@@ -10,22 +10,28 @@
     android:alpha="0.85"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:src="@drawable/logo"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:fontFamily="monospace"
         android:gravity="center"
         android:text="JetCab"
-        android:textSize="58sp"
-        android:textColor="@color/quantum_white_100"
-        android:textStyle="bold" />
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:id="@+id/login_email"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:inputType="textEmailAddress"
         android:alpha="0.7"
         android:background="@color/quantum_white_100"

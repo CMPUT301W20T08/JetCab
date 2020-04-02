@@ -17,15 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:title="Current Request"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Post Request"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
 
         </androidx.appcompat.widget.Toolbar>
 
