@@ -5,24 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:orientation="vertical"
     tools:context=".Activity_SplashScreen">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:gravity="center"
-        android:src="@drawable/logo"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="monospace"
         android:gravity="center"
         android:text="JetCab"
-        android:textSize="30dp"
+        android:textSize="58sp"
         android:textStyle="bold"
-        android:fontFamily="monospace"/>
+        android:textColor="@color/quantum_white_100"/>
 
 </LinearLayout>

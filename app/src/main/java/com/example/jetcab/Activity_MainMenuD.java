@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,8 +16,7 @@ public class Activity_MainMenuD extends AppCompatActivity {
 
     //    Button signoutD;
     //    TextView profileD;
-    Button search_req_button, current_reqs_button, past_reqs_button, profile_button;
-    ImageButton signoutD;
+    Button search_req_button, current_reqs_button, past_reqs_button, profile_button, signoutD;
 
     /**
      * asks the driver to choose one task
@@ -28,12 +26,13 @@ public class Activity_MainMenuD extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_d);
+        this.setTitle("Driver's Main Menu"); //set the tile "Driver's Main Menu"
 
         search_req_button = findViewById(R.id.search_req);
         current_reqs_button = findViewById(R.id.current_reqD);
         past_reqs_button = findViewById(R.id.past_reqD);
         profile_button = findViewById(R.id.profileD);
-        signoutD = findViewById(R.id.logout_d_image_button);
+        signoutD = findViewById(R.id.signout_buttonD);
         profile_button = findViewById(R.id.profileD);
 
         //driver should be able to see all the active requests.
