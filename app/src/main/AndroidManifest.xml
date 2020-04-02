@@ -43,8 +43,10 @@
             android:name=".CurrentRequest"
             android:label="@string/title_activity_current_request" />
         <activity android:name=".Activity_Profile" />
-        <activity android:name=".Activity_MainMenuD" />
-        <activity android:name=".Activity_MainMenuR" />
+        <activity android:name=".Activity_MainMenuD"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity_MainMenuR"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity_Signup"
             android:theme="@style/AppTheme.NoActionBar" />
