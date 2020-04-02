@@ -65,7 +65,9 @@ public class Activity_MainMenuR extends AppCompatActivity {
         past_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MainMenuR.this, PastRequest.class)); //todo need to implement past requests
+//                Intent past_req_intent = new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class);
+//                startActivity(past_req_intent);
+//                startActivity(new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class));
             }
         });
 

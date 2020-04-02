@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,12 +31,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class CurrentRequest extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private TextView status, wait;
+    private TextView status, wait, dusername, demail, dphone;
     private Button cancel_button;
     private LatLng pickup, dropoff;
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
-    private static String userID;
+    private static String userID, current_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +60,69 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
         userID = myFirebaseAuth.getCurrentUser().getUid();
-        DocumentReference dF = myFF.collection("Requests").document(userID);
+        final DocumentReference dF = myFF.collection("Requests").document(userID);
+        DocumentReference dF_accept = myFF.collection("Accepted Requests").document(userID);
         dF.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 status.setText(documentSnapshot.getString("status"));
             }
         });
+
+//        dF_accept.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+//                assert documentSnapshot != null;
+//                current_status = documentSnapshot.getString("status");
+//            }
+//        });
+//
+////        while (current_status.equals("Accepted")){
+////            setContentView(R.layout.activity_current_request_progress);
+////                dusername = findViewById(R.id.driver_username);
+////                dphone = findViewById(R.id.driver_phone);
+////                demail = findViewById(R.id.driver_email);
+////                dF_accept.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+////                    @Override
+////                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+////                        dusername.setText(documentSnapshot.getString("Driver User Id"));
+////                    }
+////                });
+////                DocumentReference dF_users = myFF.collection("users").document(dusername.getText().toString());
+////                dF_users.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+////                    @Override
+////                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+////                        demail.setText(documentSnapshot.getString("email"));
+////                        dphone.setText(documentSnapshot.getString("phone"));
+////                    }
+////                });
+//        }
+//        try {
+//            if (current_status.equals("Accepted")){
+//                //notify rider ride has been accepted by driver. should prompt rider to accept rider.
+//                //set content view to current request progress
+//                setContentView(R.layout.activity_current_request_progress);
+//                dusername = findViewById(R.id.driver_username);
+//                dphone = findViewById(R.id.driver_phone);
+//                demail = findViewById(R.id.driver_email);
+//                dF_accept.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+//                        dusername.setText(documentSnapshot.getString("Driver User Id"));
+//                    }
+//                });
+//                DocumentReference dF_users = myFF.collection("users").document(dusername.getText().toString());
+//                dF_users.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+//                        demail.setText(documentSnapshot.getString("email"));
+//                        dphone.setText(documentSnapshot.getString("phone"));
+//                    }
+//                });
+//            }
+//        } catch (Exception e) {
+//            Log.d("equal error", e.toString());
+//        }
 
         /**
          * brings up CancelRequestBeforeFragment as a pop up

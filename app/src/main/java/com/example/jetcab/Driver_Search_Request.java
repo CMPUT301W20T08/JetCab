@@ -71,7 +71,7 @@ public class Driver_Search_Request extends AppCompatActivity {
                     String UserId=(String)doc.getData ().get("User ID");
                     String PickUp=(String)doc.getData ().get("Pickup Coordinates");
                     String Dropoff=(String)doc.getData ().get("DropOff Coordinates");
-                    String fare=String.valueOf (  doc.getData ().get("fare"));
+                    String fare=String.valueOf (  doc.getData ().get("fare")); //TODO returns string with too many decimal places. fix later.
                     String details[]= {UserId,PickUp,fare,Dropoff};
                     requestdetails.add(details);
                 }
