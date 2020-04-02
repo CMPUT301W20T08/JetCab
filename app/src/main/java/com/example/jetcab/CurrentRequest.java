@@ -42,14 +42,10 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_request);
 
-        try {
-            Intent intent = getIntent();
-            Bundle coords_bun = intent.getParcelableExtra("COORDS");
-            pickup = coords_bun.getParcelable("PICKUP");
-            dropoff = coords_bun.getParcelable("DROPOFF");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Intent intent = getIntent();
+        Bundle coords_bun = intent.getParcelableExtra("COORDS");
+        pickup = coords_bun.getParcelable("PICKUP");
+        dropoff = coords_bun.getParcelable("DROPOFF");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -105,14 +101,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         builder.include(dropoff_marker.getPosition());
         LatLngBounds marker_bounds = builder.build();
 
-        CameraUpdateFactory.newLatLngBounds(marker_bounds, 0);
-
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(53.518882, -113.453807);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        Activity_Request c = new Activity_Request(sydney, sydney, 300);
-//        Activity_Request d = new Activity_Request(sydney, sydney, 300);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(marker_bounds, 100));
 
     }
 }

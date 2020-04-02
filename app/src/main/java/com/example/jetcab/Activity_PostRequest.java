@@ -51,6 +51,7 @@ public class Activity_PostRequest extends AppCompatActivity {
     private Button post_button;
     private ImageButton decrease_fare;
     private ImageButton increase_fare;
+    private static Bundle coords_bun;
     private static final int LAT_LNG_REQUEST_CODE = 0;
 
     /**
@@ -142,7 +143,7 @@ public class Activity_PostRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final_fare -= 1.00;
-                fare.setText(String.format("$%.2f", final_fare));
+                fare.setText(String.format("%.2f", final_fare));
             }
         });
         increase_fare.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +151,7 @@ public class Activity_PostRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final_fare += 1.00;
-                fare.setText(String.format("$%.2f", final_fare));
+                fare.setText(String.format("%.2f", final_fare));
             }
         });
 
@@ -171,14 +172,12 @@ public class Activity_PostRequest extends AppCompatActivity {
                     finish();
 
                     Intent current_request_intent = new Intent(v.getContext(), CurrentRequest.class); //opens current request activity
-
                     Bundle coords = new Bundle();
                     coords.putParcelable("PICKUP", pickup);   //https://stackoverflow.com/questions/16134682/how-to-send-a-latlng-instance-to-new-intent
                     coords.putParcelable("DROPOFF", dropoff);
                     current_request_intent.putExtra("COORDS", coords);
-
+                    coords_bun = coords;
                     startActivity(current_request_intent);
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Locations Address", Toast.LENGTH_LONG).show();
                 }
@@ -302,6 +301,15 @@ public class Activity_PostRequest extends AppCompatActivity {
             e.printStackTrace();
         }
         return lng;
+    }
+
+    /**
+     * this return method is primarily for creating current request activity in Activity_MainMenuR.java
+     * values within bundle are checked for coords; if coords exists, then create activity (in MainMenuR)
+     * @return bundle of coordinates
+     */
+    public static Bundle getValues() {
+        return coords_bun;
     }
 }
 
