@@ -108,8 +108,9 @@
             android:textSize="20dp"
             android:textColor="@android:color/black"/>
 
-        <TextView
+        <EditText
             android:id="@+id/offered_payment_text"
+            android:inputType="numberDecimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="000.00"

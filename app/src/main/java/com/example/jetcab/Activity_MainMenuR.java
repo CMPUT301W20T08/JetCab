@@ -2,10 +2,13 @@ package com.example.jetcab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -47,7 +50,14 @@ public class Activity_MainMenuR extends AppCompatActivity {
         current_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Activity_MainMenuR.this, CurrentRequest.class));
+                Bundle coords = Activity_PostRequest.getValues();
+                if (coords == null){  //checks if there is an active request
+                    Toast.makeText(getApplicationContext(), "No Current Active Requests", Toast.LENGTH_LONG).show();
+                } else { //shows current request if active
+                    Intent current_request_intent = new Intent(getApplicationContext(), CurrentRequest.class);
+                    current_request_intent.putExtra("COORDS", coords);
+                    startActivity(current_request_intent);
+                }
             }
         });
 
