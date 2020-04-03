@@ -31,7 +31,7 @@ import java.util.Locale;
 public class AcceptRequest extends AppCompatActivity {
 
     TextView username, email, phone, pickup, dropoff, fare;
-    Button Accept;
+    Button Accept, Back;
     ImageButton mapIcon;
     private FirebaseAuth myFirebaseAuth;
     private FirebaseFirestore myFF;
@@ -54,6 +54,7 @@ public class AcceptRequest extends AppCompatActivity {
         fare = findViewById(R.id.fare);
         Accept = findViewById(R.id.Accept);
         mapIcon = findViewById(R.id.map_icon_driver);
+        Back = findViewById(R.id.Back);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -138,6 +139,13 @@ public class AcceptRequest extends AppCompatActivity {
             }
         });
 
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Driver_Search_Request.class);
+                startActivity(intent);
+            }
+        });
 
         /**
          * Accept On ClickListner accepts the request and changes it status in the firebase.
