@@ -49,8 +49,8 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // of the ID of the current user
-                        String userID = myFirebaseAuth.getCurrentUser().getUid();
-                        DocumentReference docRef = myFF.collection("Requests").document(userID);
+                        final String userID = myFirebaseAuth.getCurrentUser().getUid();
+                        final DocumentReference docRef = myFF.collection("Requests").document(userID);
                         // check if the rider's request exists in Requests
                         // if so, delete, otherwise, delete from Accepted Requests
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -62,14 +62,22 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                                 if (documentSnapshot.exists()) {
                                     // Request exists in requests, delete
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Requests").document(userID));
-                            } else {
-                                    // Request doesn't exist in requests, delete from Accepted Requests
+                                }
+                            }
+                    });
+                        final DocumentReference docRefAccept = myFF.collection("Accepted Requests").document(userID);
+                        docRefAccept.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                                // reinitialization
+                                String userID = myFirebaseAuth.getCurrentUser().getUid();
+                                if (documentSnapshot.exists()) {
+                                    // Request exists in requests, delete
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
                                 }
-                        }
-                    });
 
-
+                            }
+                        });
                         // finish activity
                         getActivity().finish();
                     }

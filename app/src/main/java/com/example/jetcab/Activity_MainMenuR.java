@@ -69,13 +69,11 @@ public class Activity_MainMenuR extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                getBundle ();
-
                 if (coords == null){  //checks if there is an active request
                     Toast.makeText(getApplicationContext(), "No Current Active Requests", Toast.LENGTH_LONG).show();
                 }
                  else { //shows current request if active
-
+                    getBundle ();
                     Intent current_request_intent = new Intent(Activity_MainMenuR.this, CurrentRequest.class);
                     current_request_intent.putExtra("COORDS", coords);
                     startActivity(current_request_intent);
