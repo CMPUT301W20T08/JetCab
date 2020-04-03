@@ -68,7 +68,8 @@
             android:label="@string/app_name"
             android:theme="@style/ShowStatusBar">
         </activity>
-        <activity android:name=".Activity_RiderMapDisplay" />
+        <activity android:name=".Activity_RiderMapDisplay"
+            android:theme="@style/ShowStatusBar"/>
         <activity android:name=".Activity_DriverCurrentRequest"
             android:theme="@style/ShowStatusBar" />
         <activity android:name=".Activity_DriverMapDisplay" />

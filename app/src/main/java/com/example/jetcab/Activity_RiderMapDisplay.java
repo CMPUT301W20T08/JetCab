@@ -36,7 +36,6 @@ public class Activity_RiderMapDisplay extends AppCompatActivity implements OnMap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_request_map_display);
-        Activity_RiderMapDisplay.this.setTitle("Map View");
 
         back_button = findViewById(R.id.back_image_button);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
