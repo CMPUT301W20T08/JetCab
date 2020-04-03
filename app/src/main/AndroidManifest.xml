@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_scanCode"></activity>
+        <activity android:name=".Activity_QRcode"></activity>
+        <activity android:name=".Activity_scanCode" />
         <activity android:name=".Activity_Scanner" />
         <activity android:name=".AcceptRequest" />
         <activity android:name=".Driver_Search_Request" />
@@ -41,9 +42,12 @@
         <activity
             android:name=".CurrentRequest"
             android:label="@string/title_activity_current_request" />
-        <activity android:name=".Activity_Profile" />
-        <activity android:name=".Activity_MainMenuD" />
-        <activity android:name=".Activity_MainMenuR" />
+        <activity android:name=".Activity_Profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity_MainMenuD"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity_MainMenuR"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity_Signup"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -59,7 +63,7 @@
         <activity
             android:name=".Activity_PostRequest"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/ShowStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,7 +71,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity_RiderMapDisplay" />
-        <activity android:name=".Activity_DriverCurrentRequest" />
+        <activity android:name=".Activity_DriverCurrentRequest"
+            android:theme="@style/ShowStatusBar" />
         <activity android:name=".Activity_DriverMapDisplay" />
         <activity
             android:name=".MainActivity"

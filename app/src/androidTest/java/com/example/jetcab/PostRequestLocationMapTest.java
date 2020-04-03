@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * @author Joyce
  * Test class for PostActivity. All the UI tests are written here. Robotium test framework is used
  * also included the finish intent from MapDisplay
  *

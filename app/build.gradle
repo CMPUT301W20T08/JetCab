@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.jetcab"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,7 @@ android {
 }
 
 dependencies {
+    implementation "com.android.support:support-compat:29.0.2"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -47,4 +48,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     implementation 'gun0912.ted:tedpermission:2.2.2'
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.android.support:support-annotations:28.0.0'
 }

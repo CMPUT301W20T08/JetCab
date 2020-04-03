@@ -64,7 +64,9 @@ public class Activity_PostRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_request);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         toolbar.setTitle("");
+
         setSupportActionBar(toolbar);
 
         //get the current location latitude and longitude and current address
@@ -308,9 +310,7 @@ public class Activity_PostRequest extends AppCompatActivity {
      * values within bundle are checked for coords; if coords exists, then create activity (in MainMenuR)
      * @return bundle of coordinates
      */
-    public static Bundle getValues() {
-        return coords_bun;
-    }
+
 }
 
 
