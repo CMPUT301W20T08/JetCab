@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Activity_MainMenuR extends AppCompatActivity {
 
 
-    Button PostRequest, current_req, past_req, profileR, signoutR;
+    Button PostRequest, current_req, past_req, profileR;
+    ImageView signoutR;
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
     private static String userID;
