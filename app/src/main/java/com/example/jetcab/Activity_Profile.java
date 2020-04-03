@@ -42,9 +42,6 @@ public class Activity_Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //set the tile "My Profile"
-        this.setTitle("My Profile");
-
         name = findViewById(R.id.username);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);

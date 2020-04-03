@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".Activity_SplashScreen">
+    android:background="#121212"
+    android:fitsSystemWindows="false"
+    tools:context=".Activity_SplashScreen"
+    android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:fontFamily="monospace"
-        android:gravity="center"
-        android:text="JetCab"
-        android:textSize="58sp"
-        android:textStyle="bold"
-        android:textColor="@color/quantum_white_100"/>
+        android:src="@drawable/bg_splash"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

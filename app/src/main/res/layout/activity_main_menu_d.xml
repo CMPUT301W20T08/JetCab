@@ -5,72 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_MainMenuD"
-    android:background="#f5f5f4"
+    android:background="@color/background"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/search_req"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="40dp"
-        android:text="Search Requests"
-        android:textStyle="bold"
-        android:background="#e8e8e8"
-        android:textSize="25sp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_bg2">
 
-    <Button
-        android:id="@+id/current_reqD"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:text="My Current Requests"
-        android:textStyle="bold"
-        android:background="#e8e8e8"
-        android:textSize="25sp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/welcome_d"/>
 
-    <Button
-        android:id="@+id/past_reqD"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:paddingLeft="10dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:text="Past Requests"
-        android:background="#e8e8e8"
-        android:textSize="25sp"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/profileD"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:paddingLeft="10dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:text="My Profile"
-        android:background="#e8e8e8"
-        android:textSize="25sp"/>
-
-    <Button
-        android:id="@+id/signout_buttonD"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="140dp"
-        android:background="#44b0c9"
-        android:textColor="@color/quantum_white_100"
-        android:text="SIGNOUT" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:text="Welcome to JetCab Driver"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/logout_d_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="30dp"
+        android:background="#00000000"
+        android:src="@drawable/logout" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.85"
-        android:background="@drawable/bg3"/>
+        android:layout_weight="1"
+        android:background="@drawable/rounded_bg"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/search_req"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Search Requests"
+            android:textColor="@color/background"
+            android:background="@drawable/shadow"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/current_reqD"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="My Current Requests"
+            android:textSize="15dp"
+            android:textColor="@color/background"
+            android:background="@drawable/shadow"/>
+
+        <Button
+            android:id="@+id/past_reqD"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="Past Requests"
+            android:textColor="@color/background"
+            android:background="@drawable/shadow"
+            android:textSize="15dp"/>
+
+        <Button
+            android:id="@+id/profileD"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="My Profile"
+            android:textColor="@color/background"
+            android:background="@drawable/shadow"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
 </LinearLayout>
