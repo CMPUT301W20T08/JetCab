@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="000.00"
+            android:text="0.00"
             android:textColor="@color/status_bg_color"
             android:textSize="18dp"/>
 
@@ -131,7 +131,7 @@
                 android:inputType="numberDecimal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="000.00"
+                android:text="0.00"
                 android:textSize="18dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="2dp"
