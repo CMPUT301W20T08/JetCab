@@ -13,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -318,12 +319,20 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
         dialog.setContentView(R.layout.rider_profile_popup_window);
         ImageButton ok_button = dialog.findViewById(R.id.ok_image_button);
         TextView username_text = dialog.findViewById(R.id.rider_username_text);
-        TextView phone_text = dialog.findViewById(R.id.rider_phone_text);
+        final TextView phone_text = dialog.findViewById(R.id.rider_phone_text);
         TextView email_text = dialog.findViewById(R.id.rider_email_text);
 
         username_text.setText(username);
         phone_text.setText(phone);
         email_text.setText(email);
+
+        phone_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent call = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone_text.getText().toString()));
+                startActivity(call);
+            }
+        });
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override

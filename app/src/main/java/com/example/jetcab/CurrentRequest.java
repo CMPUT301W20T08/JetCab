@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -122,17 +123,13 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
                         getDriverInfo ( documentSnapshot.getString ( "Driver User Id" ));
                         createDialog ( "Do you want to confirm your ride " ,"Confirmed");
                     }
-
                     if(status.getText ().toString ().equals ( "Arrived" ))
                     {
                         createDialog ( "Have you arrived " ,"Completed");
                     }
-
                 }
             }
         });
-
-
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
@@ -277,12 +274,20 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         dialog.setContentView(R.layout.driver_profile_popup_window);
         ImageButton ok_button = dialog.findViewById(R.id.ok_image);
         TextView username_text = dialog.findViewById(R.id.driver_username_text);
-        TextView phone_text = dialog.findViewById(R.id.driver_phone_text);
+        final TextView phone_text = dialog.findViewById(R.id.driver_phone_text);
         TextView email_text = dialog.findViewById(R.id.driver_email_text);
 
         username_text.setText(username);
         phone_text.setText(phone);
         email_text.setText(email);
+
+        phone_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent call = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone_text.getText().toString()));
+                startActivity(call);
+            }
+        });
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
