@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".Driver_Search_Request">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -19,14 +20,16 @@
             app:title="Search Request"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView
+        android:layout_margin="10dp"
         android:id="@+id/openrequest"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:dividerHeight="10dp"
+        android:divider="@android:color/white"
+        />
 </LinearLayout>

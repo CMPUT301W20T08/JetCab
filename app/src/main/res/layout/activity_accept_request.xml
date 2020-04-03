@@ -7,12 +7,29 @@
     android:orientation="vertical"
     tools:context=".AcceptRequest">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_p"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Request Details"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:text="Riders Information"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:textColor="@color/background"/>
@@ -28,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username: "
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/background" />
 
@@ -38,7 +55,7 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:layout_marginLeft="5dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/background" />
     </LinearLayout>
 
@@ -53,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email ID: "
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/background"/>
 
@@ -63,7 +80,7 @@
             android:layout_height="wrap_content"
             android:hint="***@88.com"
             android:layout_marginLeft="5dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/background" />
 
     </LinearLayout>
@@ -79,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone No: "
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/background"/>
 
@@ -89,7 +106,7 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:layout_marginLeft="5dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/background" />
 
     </LinearLayout>
@@ -112,7 +129,7 @@
                 android:layout_weight="5"
                 android:layout_marginLeft="15dp"
                 android:text="Ride Information"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:textColor="@android:color/white"/>
@@ -133,7 +150,7 @@
             android:layout_height="wrap_content"
             android:text="PickUp: "
             android:layout_marginLeft="15dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white"/>
@@ -144,7 +161,7 @@
             android:layout_height="wrap_content"
             android:hint="PickUp"
             android:layout_marginLeft="15dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white"/>
 
         <TextView
@@ -152,7 +169,7 @@
             android:layout_height="wrap_content"
             android:text="Drop Off: "
             android:layout_marginLeft="15dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:textColor="@android:color/white"/>
@@ -163,7 +180,7 @@
             android:layout_height="wrap_content"
             android:hint="Drop Off"
             android:layout_marginLeft="15dp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white" />
 
         <LinearLayout
@@ -177,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fare: "
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"/>
 
@@ -186,23 +203,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Fare"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/Accept"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_bg4"
-            android:alpha="0.6"
-            android:text="ACCEPT"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_bg4"
+                android:alpha="0.6"
+                android:text="BACK"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/Accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_bg4"
+                android:alpha="0.6"
+                android:text="ACCEPT"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

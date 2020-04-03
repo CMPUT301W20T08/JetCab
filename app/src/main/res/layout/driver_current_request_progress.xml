@@ -19,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:title="Current Request"
+            android:layout_marginTop="15dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/background"
                 android:src="@drawable/scan"
                 android:visibility="invisible"/>
 
