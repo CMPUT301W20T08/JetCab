@@ -33,6 +33,7 @@ public class CancelRequestBeforeFragment extends DialogFragment {
 
     private FirebaseAuth myFirebaseAuth;
     private FirebaseFirestore myFF;
+    public static Integer done_status = 0;
 
     @NonNull
     @Override
@@ -59,8 +60,9 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                                 // reinitialization
                                 String userID = myFirebaseAuth.getCurrentUser().getUid();
 
-                                if (documentSnapshot.exists()) {
+                                if (documentSnapshot.exists() && (done_status == 0)) {
                                     // Request exists in requests, delete
+                                    done_status = 1;
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Requests").document(userID));
                                 }
                             }
@@ -71,9 +73,9 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                                 // reinitialization
                                 String userID = myFirebaseAuth.getCurrentUser().getUid();
-                                if (documentSnapshot.exists()) {
+                                if (documentSnapshot.exists() && (done_status == 0)) {
                                     // Request exists in accepted requests, delete
-
+                                    done_status = 1;
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
                                 }
 
@@ -81,6 +83,7 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                         });
                         // finish activity
                         getActivity().finish();
+                        done_status = 0;
                     }
                 })
                 .setNegativeButton("No",null)
