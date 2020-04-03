@@ -25,7 +25,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/from_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/background"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,95 +46,123 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/to_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/background"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:alpha="0.8"
+        android:background="@drawable/rounded_bg4"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FAIR FARE"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="8dp"
-            android:textSize="20dp"
-            android:textColor="@android:color/black"/>
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/fair_fare_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
             android:text="000.00"
-            android:textSize="20dp"/>
+            android:textColor="@color/status_bg_color"
+            android:textSize="18dp"/>
 
     </LinearLayout>
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="OFFERED PAYMENT"
-       android:layout_marginTop="8dp"
-       android:layout_marginLeft="12dp"
-       android:layout_marginRight="8dp"
-       android:textSize="20dp"
-       android:textColor="@android:color/black"/>
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:alpha="0.8"
+        android:background="@drawable/rounded_bg4"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/add_payment_button"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:text="OFFERED PAYMENT"
             android:layout_marginLeft="12dp"
-            android:rotation="180"
-            android:src="@drawable/arrow"/>
+            android:layout_marginRight="8dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="3dp"
-            android:text="$"
-            android:textSize="20dp"
-            android:textColor="@android:color/black"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/offered_payment_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="000.00"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"
-            android:textStyle="bold"/>
+            <ImageButton
+                android:id="@+id/minus_payment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:background="#00000000"
+                android:src="@drawable/delete"/>
 
-        <ImageButton
-            android:id="@+id/minus_payment_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="3dp"
-            android:src="@drawable/arrow"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="$"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+            <EditText
+                android:id="@+id/offered_payment_text"
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000.00"
+                android:textSize="18dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="2dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/add_payment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="5dp"
+                android:background="#00000000"
+                android:rotation="180"
+                android:src="@drawable/add"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button
         android:id="@+id/post_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bg4"
+        android:alpha="0.5"
         android:text="POST"
         android:textSize="16dp"
-        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="300dp"/>
 
 </LinearLayout>

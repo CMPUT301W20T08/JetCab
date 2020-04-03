@@ -18,15 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:title="Current Request"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current Request"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -62,7 +55,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
-        android:background="#E3E3E3">
+        android:alpha="0.8"
+        android:background="@color/background">
 
         <TextView
             android:layout_width="match_parent"
@@ -72,7 +66,7 @@
             android:text="WAITING FOR RIDER'S CONFIRM..."
             android:textStyle="bold"
             android:textSize="16dp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 
