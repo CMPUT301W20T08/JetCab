@@ -3,11 +3,13 @@ package com.example.jetcab;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.AlertDialog;
 
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.content.Context;
 
 import android.content.DialogInterface;
@@ -290,5 +292,6 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         });
         dialog.show();
     }
+
 
 }

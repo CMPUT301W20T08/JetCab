@@ -1,7 +1,9 @@
 package com.example.jetcab;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -27,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -77,6 +80,7 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
 
     /**
      * check the status of the request from firebase, and show the status of current request
+     * @author chirag: notify driver if the rider confirms the request.
      * @param savedInstanceState
      */
     @Override
@@ -106,7 +110,24 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
                     if (status.matches("Accepted")) {
                         waitingStatus();
                     } else if (status.matches("Confirmed") || status.matches("Pickup")
-                            || status.matches("On The Way") || status.matches("Arrived")) { //the in the progress status
+                            || status.matches("On The Way") || status.matches("Arrived")) {
+                        if(status.matches ( "Confirmed" ))
+                        {
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(Activity_DriverCurrentRequest.this);
+                            builder.setMessage ( "Your Ride has been confirmed");
+
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                  dialog.dismiss ();
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss ();
+                                }
+                            });
+                            builder.show ();
+                        }
                         getRiderInfo(queryDocumentSnapshots);
                         progressStatus(queryDocumentSnapshots);
                     }

@@ -76,7 +76,7 @@ public class Activity_MainMenuR extends AppCompatActivity {
                 }
                  else { //shows current request if active
 
-                    Intent current_request_intent = new Intent(getApplicationContext(), CurrentRequest.class);
+                    Intent current_request_intent = new Intent(Activity_MainMenuR.this, CurrentRequest.class);
                     current_request_intent.putExtra("COORDS", coords);
                     startActivity(current_request_intent);
                 }
@@ -126,7 +126,7 @@ public class Activity_MainMenuR extends AppCompatActivity {
             public void onComplete ( @NonNull Task<DocumentSnapshot> task ) {
                 if (task.isSuccessful ( )) {
                     DocumentSnapshot document = task.getResult ( );
-                    if (document.get("status") != null) {
+                    if (document!= null) {
                         coords = new Bundle (  );
                         String coordinates[] = document.get ( "Pickup Coordinates" ).toString ( ).split ( "," );
                         String coordinates1[] = document.get ( "DropOff Coordinates" ).toString ( ).split ( "," );
@@ -140,7 +140,7 @@ public class Activity_MainMenuR extends AppCompatActivity {
                             public void onComplete ( @NonNull Task<DocumentSnapshot> task ) {
                                 if (task.isSuccessful ( )) {
                                     DocumentSnapshot document = task.getResult ( );
-                                    if (document.get("status") != null) {
+                                    if (document!= null) {
                                         coords=new Bundle();
                                         String coordinates[] = document.get ( "Pickup Coordinates" ).toString ( ).split ( "," );
                                         String coordinates1[] = document.get ( "DropOff Coordinates" ).toString ( ).split ( "," );
