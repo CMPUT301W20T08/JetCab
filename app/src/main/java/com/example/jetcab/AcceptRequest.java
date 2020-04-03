@@ -142,8 +142,7 @@ public class AcceptRequest extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Driver_Search_Request.class);
-                startActivity(intent);
+                finish();
             }
         });
 

@@ -71,17 +71,6 @@
             android:background="@drawable/shadow"/>
 
         <Button
-            android:id="@+id/past_req"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="Past Requests"
-            android:textColor="@color/background"
-            android:background="@drawable/shadow"
-            android:textSize="15dp"/>
-
-        <Button
             android:id="@+id/profileR"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

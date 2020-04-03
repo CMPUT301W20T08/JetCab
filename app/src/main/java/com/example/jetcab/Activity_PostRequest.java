@@ -141,6 +141,7 @@ public class Activity_PostRequest extends AppCompatActivity {
             @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
+                final_fare = Float.parseFloat(fare.getText().toString());
                 final_fare -= 1.00;
                 fare.setText(String.format("%.2f", final_fare));
             }
@@ -149,6 +150,7 @@ public class Activity_PostRequest extends AppCompatActivity {
             @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
+                final_fare = Float.parseFloat(fare.getText().toString());
                 final_fare += 1.00;
                 fare.setText(String.format("%.2f", final_fare));
             }
@@ -167,6 +169,8 @@ public class Activity_PostRequest extends AppCompatActivity {
                     LatLng pickup = new LatLng(getLat(start_location) , getLng(start_location));
                     LatLng dropoff = new LatLng(getLat(end_location) , getLng(end_location));
 
+                    final_fare = Float.parseFloat(fare.getText().toString());
+                    Log.d("LASTFARE", "last final fare: "+ fare.getText().toString());
                     Activity_Request post = new Activity_Request(pickup, dropoff, final_fare);
                     finish();
 
