@@ -64,7 +64,9 @@ public class Activity_PostRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_request);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         toolbar.setTitle("");
+
         setSupportActionBar(toolbar);
 
         //get the current location latitude and longitude and current address

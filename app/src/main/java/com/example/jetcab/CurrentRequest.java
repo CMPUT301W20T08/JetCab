@@ -1,12 +1,14 @@
 package com.example.jetcab;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.AlertDialog;
+
 import android.app.Dialog;
 import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -27,17 +29,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
 import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,11 +60,12 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
     private String TAG="TAG";
     private GoogleMap mMap;
     private TextView status, wait;
-    private TextView cancel_button;
+  private TextView cancel_button;
     private LatLng pickup, dropoff;
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
     private static String userID;
+
     private Dialog dialog;
     String username, phone, email;
 
@@ -73,7 +80,9 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         setContentView(R.layout.activity_current_request);
 
         Intent intent = getIntent();
+
         dialog = new Dialog(this);
+
         Bundle coords_bun = intent.getParcelableExtra("COORDS");
         pickup = coords_bun.getParcelable("PICKUP");
         dropoff = coords_bun.getParcelable("DROPOFF");
@@ -122,6 +131,17 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
 
 
 
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFF = FirebaseFirestore.getInstance();
+        userID = myFirebaseAuth.getCurrentUser().getUid();
+        DocumentReference dF = myFF.collection("Requests").document(userID);
+        dF.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                status.setText(documentSnapshot.getString("status"));
+            }
+        });
+
         /**
          * brings up CancelRequestBeforeFragment as a pop up
          * to confirm if the user wants to cancel or not
@@ -159,6 +179,7 @@ public class CurrentRequest extends FragmentActivity implements OnMapReadyCallba
         LatLngBounds marker_bounds = builder.build();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(marker_bounds, 100));
+
 
     }
 

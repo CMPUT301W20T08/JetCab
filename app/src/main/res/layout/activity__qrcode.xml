@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_QRcode"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:id="@+id/choices"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TIP? "
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="no tip"
+            android:textSize="25dp"
+            android:checked="true">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/r2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="$1"
+            android:textSize="22dp">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/r3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="$2"
+            android:textSize="22dp">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/r4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="$3"
+            android:textSize="22dp">
+        </RadioButton>
+
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/qr_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"/>
+
+    <Button
+        android:id="@+id/qr_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#b1ece8"
+        android:text="Generate QR Code"/>
+
+
+    <LinearLayout
+        android:id="@+id/done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/button_done"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="DONE"
+            android:background="#7ad878"/>
+
+    </LinearLayout>
+
+</LinearLayout>

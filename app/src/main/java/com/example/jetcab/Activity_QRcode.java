@@ -35,6 +35,7 @@ public class Activity_QRcode extends AppCompatActivity {
     FirebaseAuth myFirebaseAuth;
     FirebaseFirestore myFF;
     String userID;
+
     Double fare;
     float m;
     float tip;
@@ -68,12 +69,16 @@ public class Activity_QRcode extends AppCompatActivity {
 
         //get fare amount from firebase
         userID = myFirebaseAuth.getCurrentUser().getUid();
+
         DocumentReference dr = myFF.collection("Completed Requests").document(userID);
+
         dr.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 fare = documentSnapshot.getDouble("fare");
+
                m=fare.floatValue ();
+
             }
         });
 
@@ -84,6 +89,7 @@ public class Activity_QRcode extends AppCompatActivity {
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                 try {
                     if (r1.isChecked()){
+
                         tip=0f;
                     }
                     else if (r2.isChecked()){
@@ -98,6 +104,8 @@ public class Activity_QRcode extends AppCompatActivity {
                     //calculates total payment
 
                     m+=tip;
+
+
                     String payment = "$ " + m;
                     //generates the qr code
                     BitMatrix bitMatrix = multiFormatWriter.encode(payment, BarcodeFormat.QR_CODE,300,300);

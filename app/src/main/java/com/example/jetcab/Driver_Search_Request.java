@@ -89,9 +89,7 @@ public class Driver_Search_Request extends AppCompatActivity {
              * @param position
              * @param id
              */
-=======
-       
-       
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Driver_Search_Request.this, AcceptRequest.class);

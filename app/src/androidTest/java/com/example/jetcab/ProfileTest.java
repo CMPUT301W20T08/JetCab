@@ -1,6 +1,5 @@
 package com.example.jetcab;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -58,13 +57,13 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testforrider@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "123456");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         TextView Rpro = (TextView) solo.getView(R.id.profileR);
         solo.clickOnView(Rpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }
@@ -77,16 +76,16 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testforrider@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "123456");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         TextView Rpro = (TextView) solo.getView(R.id.profileR);
         solo.clickOnView(Rpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         assertTrue(solo.waitForText("Rider Test1", 1, 2000));
         assertTrue(solo.waitForText("testforrider@gmail.com", 1, 2000));
         assertTrue(solo.waitForText("5879888888", 1, 2000));
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }
@@ -99,10 +98,10 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testforrider@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "123456");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         TextView Rpro = (TextView) solo.getView(R.id.profileR);
         solo.clickOnView(Rpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         TextView phone = (TextView) solo.getView(R.id.phone);
         solo.clickOnView(phone);
         solo.clickOnButton("Cancel");
@@ -118,7 +117,7 @@ public class ProfileTest {
         assertTrue(solo.waitForText("5879888888", 1, 2000));
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }
@@ -131,10 +130,10 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testforrider@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "123456");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         TextView Rpro = (TextView) solo.getView(R.id.profileR);
         solo.clickOnView(Rpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         TextView email = (TextView) solo.getView(R.id.email);
         solo.clickOnView(email);
         solo.clickOnButton("Cancel");
@@ -150,7 +149,7 @@ public class ProfileTest {
         assertTrue(solo.waitForText("testforrider@gmail.com", 1, 2000));
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuR.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuR.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }
@@ -163,13 +162,13 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testfordriver@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "654321");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuD.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuD.class);
         TextView Dpro = (TextView) solo.getView(R.id.profileD);
         solo.clickOnView(Dpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuD.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuD.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }
@@ -184,16 +183,16 @@ public class ProfileTest {
         solo.enterText((EditText) solo.getView(R.id.login_email), "testfordriver@gmail.com");
         solo.enterText((EditText) solo.getView(R.id.login_password), "654321");
         solo.clickOnButton("LOGIN");
-        solo.assertCurrentActivity("Not in right Activity", MainMenuD.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuD.class);
         TextView Dpro = (TextView) solo.getView(R.id.profileD);
         solo.clickOnView(Dpro);
-        solo.assertCurrentActivity("Not in right Activity", Profile.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_Profile.class);
         assertTrue(solo.waitForText("Driver Test1", 1, 2000));
         assertTrue(solo.waitForText("testfordriver@gmail.com", 1, 2000));
         assertTrue(solo.waitForText("5879999999", 1, 2000));
         TextView back = (TextView) solo.getView(R.id.back);
         solo.clickOnView(back);
-        solo.assertCurrentActivity("Not in right Activity", MainMenuD.class);
+        solo.assertCurrentActivity("Not in right Activity", Activity_MainMenuD.class);
         solo.clickOnButton("SIGNOUT");
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
     }

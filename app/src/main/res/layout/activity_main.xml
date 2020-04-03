@@ -6,40 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
+    android:fitsSystemWindows="false"
+    android:background="@drawable/b2"
+    android:alpha="0.85"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="130dp"
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="JetCab"
-        android:textSize="50sp"
+        android:textSize="58sp"
+        android:textColor="@color/quantum_white_100"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/login_email"
         android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="100dp"
         android:inputType="textEmailAddress"
-        android:hint="EMAIL ADDRESS" />
+        android:alpha="0.7"
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  EMAIL ADDRESS" />
 
     <EditText
         android:id="@+id/login_password"
         android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:alpha="0.7"
         android:inputType="textPassword"
-        android:hint="PASSWORD"/>
+        android:background="@color/quantum_white_100"
+        android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+        android:paddingLeft="10dp"
+        android:hint="  PASSWORD"/>
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:text="LOGIN"/>
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg"
+        android:text="LOGIN"
+        android:textSize="15sp"
+        android:alpha="0.9" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/quantum_white_100"
             android:text="NO ACCOUNT?"/>
 
         <TextView
