@@ -72,7 +72,7 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                                 // reinitialization
                                 String userID = myFirebaseAuth.getCurrentUser().getUid();
                                 if (documentSnapshot.exists()) {
-                                    // Request exists in requests, delete
+                                    // Request exists in accepted requests, delete
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
                                 }
 
