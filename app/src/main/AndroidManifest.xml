@@ -26,7 +26,8 @@
         <activity android:name=".Activity_scanCode" />
         <activity android:name=".Activity_Scanner" />
         <activity android:name=".AcceptRequest" />
-        <activity android:name=".Driver_Search_Request" />
+        <activity android:name=".Driver_Search_Request"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -64,11 +65,6 @@
             android:name=".Activity_PostRequest"
             android:label="@string/app_name"
             android:theme="@style/ShowStatusBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity_RiderMapDisplay" />
         <activity android:name=".Activity_DriverCurrentRequest"

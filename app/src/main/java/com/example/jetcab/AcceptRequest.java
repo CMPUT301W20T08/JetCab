@@ -58,6 +58,8 @@ public class AcceptRequest extends AppCompatActivity {
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
 
+        this.setTitle("Accept Request");
+
         DocumentReference dF = myFF.collection("users").document(getIntent().getStringExtra("UserId"));
         dF.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
