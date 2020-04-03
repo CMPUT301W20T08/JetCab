@@ -81,13 +81,15 @@ public class Activity_MainMenuR extends AppCompatActivity {
             }
         });
 
-        //rider should be able to see thier past requests
-        past_req.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(MainMenuR.this, PastRequest.class)); //todo need to implement past requests
-            }
-        });
+//        //rider should be able to see thier past requests
+//        past_req.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent past_req_intent = new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class);
+//                startActivity(past_req_intent);
+//                startActivity(new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class));
+//            }
+//        });
 
         //go to the user's profile if the user clicks on "My Profile"
         profileR.setOnClickListener(new View.OnClickListener() {
@@ -107,17 +109,13 @@ public class Activity_MainMenuR extends AppCompatActivity {
         });
     }
 
-
     public void getBundle()
     {
-
-
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFF = FirebaseFirestore.getInstance();
         userID = myFirebaseAuth.getCurrentUser().getUid();
         DocumentReference dF = myFF.collection("Requests").document(userID);
         final DocumentReference dF1 = myFF.collection("Accepted Requests").document(userID);
-
         dF.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
 
             @Override
@@ -130,7 +128,6 @@ public class Activity_MainMenuR extends AppCompatActivity {
                         String coordinates1[] = document.get ( "DropOff Coordinates" ).toString ( ).split ( "," );
                         coords.putParcelable ( "PICKUP", new LatLng ( Double.parseDouble ( coordinates[ 0 ] ), Double.parseDouble ( coordinates[ 1 ] ) ) );   //https://stackoverflow.com/questions/16134682/how-to-send-a-latlng-instance-to-new-intent
                         coords.putParcelable ( "DROPOFF", new LatLng ( Double.parseDouble ( coordinates1[ 0 ] ), Double.parseDouble ( coordinates1[ 1 ] ) ) );
-
                     } else {
                         dF1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot> () {
 
@@ -144,23 +141,15 @@ public class Activity_MainMenuR extends AppCompatActivity {
                                         String coordinates1[] = document.get ( "DropOff Coordinates" ).toString ( ).split ( "," );
                                         coords.putParcelable ( "PICKUP", new LatLng ( Double.parseDouble ( coordinates[ 0 ] ), Double.parseDouble ( coordinates[ 1 ] ) ) );   //https://stackoverflow.com/questions/16134682/how-to-send-a-latlng-instance-to-new-intent
                                         coords.putParcelable ( "DROPOFF", new LatLng ( Double.parseDouble ( coordinates1[ 0 ] ), Double.parseDouble ( coordinates1[ 1 ] ) ) );
-
                                     } else {
                                         Log.d("TAG","no such document");
-
                                     }
                                 }
                             }
                         });
-
                     }
                 }
             }
         });
-
     }
-
-
-
-
 }
