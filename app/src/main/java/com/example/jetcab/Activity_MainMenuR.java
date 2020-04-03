@@ -68,6 +68,7 @@ public class Activity_MainMenuR extends AppCompatActivity {
         current_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (coords == null){  //checks if there is an active request
                     Toast.makeText(getApplicationContext(), "No Current Active Requests", Toast.LENGTH_LONG).show();
                 }
