@@ -209,7 +209,9 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
             scan_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     startActivity(new Intent(getApplicationContext(), Activity_Scanner.class));
+
                 }
             });
         }
@@ -241,7 +243,10 @@ public class Activity_DriverCurrentRequest extends AppCompatActivity implements 
                 update.put("status", "Arrived");
                 documentReference.update(update);
                 //scan qr code
+
+                
                 startActivity(new Intent(getApplicationContext(), Activity_Scanner.class));
+
             }
         });
 
