@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 //There is already a user which was stored in firebase
 //email:testforrider@gmail.com
 //password:123456
@@ -54,6 +56,17 @@ public class MainMenuRTest {
         ImageButton br = (ImageButton) solo.getView(R.id.logout_r_image_button);
         solo.clickOnView(br);
         solo.assertCurrentActivity("Not in right Activity", MainActivity.class);
+    }
+
+    /**
+     * checks if warning toast appears when clicking on my current request when no request is active
+     * @throws Exception
+     */
+    @Test
+    public void checkNoCurrentRequestToast() throws Exception {
+        solo.assertCurrentActivity("Wrong Activity", Activity_MainMenuR.class);
+        solo.clickOnText("My Current Requests");
+        assertTrue("Toast does not show", solo.waitForText("No Current Active Requests"));
     }
 
     /**
