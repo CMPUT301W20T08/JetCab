@@ -78,7 +78,6 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                                     done_status = 1;
                                     Activity_Request.CancelledRequest(userID, myFF.collection("Accepted Requests").document(userID));
                                 }
-
                             }
                         });
                         // finish activity
@@ -88,6 +87,5 @@ public class CancelRequestBeforeFragment extends DialogFragment {
                 })
                 .setNegativeButton("No",null)
                 .create();
-
     }
 }

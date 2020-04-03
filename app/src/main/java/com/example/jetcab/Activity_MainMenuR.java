@@ -1,6 +1,4 @@
 package com.example.jetcab;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,21 +18,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
-
 /**
  * this is rider's main menu
  */
 public class Activity_MainMenuR extends AppCompatActivity {
-
 
     Button PostRequest, current_req, past_req, profileR;
     ImageView signoutR;
     private static FirebaseAuth myFirebaseAuth;
     private static FirebaseFirestore myFF;
     private static String userID;
-    private  Bundle coords;
-
+    private Bundle coords;
 
     /**
      * asks the rider to choose one task
@@ -45,15 +39,12 @@ public class Activity_MainMenuR extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_r);
 
-
         //set the tile "Rider's Main Menu"
         this.setTitle("Rider Main Menu");
         signoutR = findViewById(R.id.logout_r_image_button);
-
         profileR = findViewById(R.id.profileR);
         PostRequest = findViewById(R.id.postrequest);
         current_req = findViewById(R.id.current_req);
-        past_req = findViewById(R.id.past_req);
 
         //rider post requests functionality
         PostRequest.setOnClickListener(new View.OnClickListener() {
@@ -68,28 +59,17 @@ public class Activity_MainMenuR extends AppCompatActivity {
         current_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getBundle ();
                 if (coords == null){  //checks if there is an active request
                     Toast.makeText(getApplicationContext(), "No Current Active Requests", Toast.LENGTH_LONG).show();
                 }
                  else { //shows current request if active
-                    getBundle ();
                     Intent current_request_intent = new Intent(Activity_MainMenuR.this, CurrentRequest.class);
                     current_request_intent.putExtra("COORDS", coords);
                     startActivity(current_request_intent);
                 }
             }
         });
-
-//        //rider should be able to see thier past requests
-//        past_req.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent past_req_intent = new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class);
-//                startActivity(past_req_intent);
-//                startActivity(new Intent(Activity_MainMenuR.this, Activity_rider_past_requests.class));
-//            }
-//        });
 
         //go to the user's profile if the user clicks on "My Profile"
         profileR.setOnClickListener(new View.OnClickListener() {
