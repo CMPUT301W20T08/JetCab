@@ -54,7 +54,7 @@ public class Activity_MainMenuD extends AppCompatActivity {
         past_reqs_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MainMenuD.this, PastRequests.class)); //TODO need to implement pastrequests.java
+                startActivity(new Intent(Activity_MainMenuD.this, activity_driver_past_request.class));
             }
         });
         //go to the user's profile if the user clicks on "My Profile"
